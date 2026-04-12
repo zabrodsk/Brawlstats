@@ -223,7 +223,7 @@ function StrategyEditorInner() {
           : 'Zone'
 
   return (
-    <div className="flex flex-col h-screen bg-[#0D1117] overflow-hidden">
+    <div className="flex flex-col flex-1 min-h-0 bg-[#0D1117] overflow-hidden">
       {/* Top bar — tablet/desktop */}
       <header className="hidden md:flex items-center gap-3 px-4 py-2 bg-[#161B22] border-b border-gray-700 shrink-0">
         <button
@@ -465,7 +465,7 @@ export default function NewStrategyPage() {
   return (
     <Suspense
       fallback={
-        <div className="flex h-screen items-center justify-center bg-[#0D1117] text-gray-500 text-sm">
+        <div className="flex flex-1 min-h-0 items-center justify-center bg-[#0D1117] text-gray-500 text-sm">
           Loading…
         </div>
       }

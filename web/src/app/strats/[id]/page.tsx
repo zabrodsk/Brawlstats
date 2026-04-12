@@ -228,7 +228,7 @@ export default function EditStrategyPage() {
 
   if (loading) {
     return (
-      <div className="flex h-screen items-center justify-center bg-[#0D1117] text-gray-500 text-sm">
+      <div className="flex flex-1 min-h-0 items-center justify-center bg-[#0D1117] text-gray-500 text-sm">
         Loading strategy…
       </div>
     )
@@ -236,7 +236,7 @@ export default function EditStrategyPage() {
 
   if (notFound) {
     return (
-      <div className="flex h-screen flex-col items-center justify-center bg-[#0D1117] gap-4">
+      <div className="flex flex-1 min-h-0 flex-col items-center justify-center bg-[#0D1117] gap-4">
         <p className="text-gray-400 text-sm">Strategy not found.</p>
         <button
           onClick={() => router.push('/strats')}
@@ -262,7 +262,7 @@ export default function EditStrategyPage() {
           : 'Zone'
 
   return (
-    <div className="flex flex-col h-screen bg-[#0D1117] overflow-hidden">
+    <div className="flex flex-col flex-1 min-h-0 bg-[#0D1117] overflow-hidden">
       {/* Top bar — tablet/desktop */}
       <header className="hidden md:flex items-center gap-3 px-4 py-2 bg-[#161B22] border-b border-gray-700 shrink-0">
         <button

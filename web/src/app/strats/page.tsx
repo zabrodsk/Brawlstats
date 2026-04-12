@@ -25,11 +25,11 @@ function formatDate(iso: string): string {
 
 function StrategySkeleton() {
   return (
-    <div className="rounded-lg bg-brand-surface border border-gray-800 overflow-hidden animate-pulse">
-      <div className="w-full aspect-video bg-gray-700" />
-      <div className="p-3 flex flex-col gap-2">
-        <div className="h-4 w-3/4 bg-gray-700 rounded" />
-        <div className="h-3 w-1/2 bg-gray-800 rounded" />
+    <div className="rounded-2xl bg-brand-surface border border-white/[0.06] overflow-hidden animate-pulse shadow-card">
+      <div className="w-full aspect-video bg-white/[0.05]" />
+      <div className="p-3.5 flex flex-col gap-2">
+        <div className="h-3.5 w-3/4 bg-white/[0.07] rounded-full" />
+        <div className="h-2.5 w-1/2 bg-white/[0.04] rounded-full" />
       </div>
     </div>
   )
@@ -47,7 +47,6 @@ export default function StratsPage() {
   useEffect(() => {
     getAllStrategies()
       .then((all) => {
-        // Sort newest first (modifiedAt descending)
         const sorted = [...all].sort(
           (a, b) => new Date(b.modifiedAt).getTime() - new Date(a.modifiedAt).getTime()
         )
@@ -112,106 +111,119 @@ export default function StratsPage() {
   const noFilterResults = !loading && !isEmpty && filteredStrategies.length === 0
 
   return (
-    <div className="min-h-full bg-brand-black px-6 py-6">
-      <section className="rounded-xl border border-gray-800 bg-[#11161C] p-5 md:p-6">
-        <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <p className="text-xs uppercase tracking-[0.12em] text-gray-500">Strategy Dashboard</p>
-            <h1 className="mt-2 text-3xl font-bold text-white">My Strategies</h1>
-            <p className="mt-2 max-w-2xl text-sm text-gray-400">
-              Track your playbook, refine compositions, and jump back into strategy editing fast.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            <Link
-              href="/maps"
-              className="inline-flex items-center rounded-lg bg-brand-yellow px-4 py-2 text-sm font-semibold text-black transition-colors hover:bg-yellow-400"
-            >
-              + New Strategy
-            </Link>
-            <Link
-              href="/maps"
-              className="inline-flex items-center rounded-lg border border-gray-700 px-4 py-2 text-sm font-medium text-gray-200 transition-colors hover:border-gray-500 hover:text-white"
-            >
-              Browse Maps
-            </Link>
-          </div>
-        </div>
+    <div className="min-h-full bg-brand-black px-5 py-6 md:px-8 md:py-8">
 
-        {!loading && (
-          <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <div className="rounded-lg border border-gray-800 bg-brand-surface px-4 py-3">
-              <p className="text-xs uppercase tracking-wide text-gray-500">Total strategies</p>
-              <p className="mt-1 text-2xl font-semibold text-white">{dashboardStats.total}</p>
+      {/* Header section — Double-Bezel outer shell */}
+      <section className="p-[1px] rounded-2xl bg-gradient-to-b from-white/[0.08] to-white/[0.03] animate-fade-up">
+        <div className="rounded-[calc(1rem-1px)] bg-brand-surface-2 p-5 md:p-6 shadow-inner-highlight">
+          <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <span className="text-[11px] font-medium uppercase tracking-[0.14em] text-white/25">
+                Strategy Dashboard
+              </span>
+              <h1 className="mt-2 text-2xl md:text-3xl font-bold tracking-[-0.02em] text-white">
+                My strategies
+              </h1>
+              <p className="mt-2 max-w-md text-[14px] leading-relaxed text-white/35">
+                Track your playbook, refine compositions, and jump back into strategy editing fast.
+              </p>
             </div>
-            <div className="rounded-lg border border-gray-800 bg-brand-surface px-4 py-3">
-              <p className="text-xs uppercase tracking-wide text-gray-500">Game modes covered</p>
-              <p className="mt-1 text-2xl font-semibold text-white">{dashboardStats.modes}</p>
-            </div>
-            <div className="rounded-lg border border-gray-800 bg-brand-surface px-4 py-3">
-              <p className="text-xs uppercase tracking-wide text-gray-500">Updated this week</p>
-              <p className="mt-1 text-2xl font-semibold text-white">{dashboardStats.updatedThisWeek}</p>
+            <div className="flex flex-wrap gap-2 shrink-0">
+              {/* Primary CTA */}
+              <Link
+                href="/maps"
+                className="group inline-flex items-center gap-2.5 rounded-full bg-brand-yellow pl-4 pr-1.5 py-1.5 text-sm font-semibold text-black transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-yellow-400 active:scale-[0.98]"
+              >
+                New strategy
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-black/10 group-hover:translate-x-0.5 group-hover:-translate-y-[1px] transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]">
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
+                  </svg>
+                </span>
+              </Link>
+              <Link
+                href="/maps"
+                className="inline-flex items-center rounded-full border border-white/[0.1] px-4 py-2 text-sm font-medium text-white/50 transition-all duration-250 hover:border-white/20 hover:text-white/80 hover:bg-white/[0.04] active:scale-[0.98]"
+              >
+                Browse maps
+              </Link>
             </div>
           </div>
-        )}
+
+          {/* Stat cards */}
+          {!loading && (
+            <div className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-3">
+              {[
+                { label: 'Total strategies', value: dashboardStats.total },
+                { label: 'Game modes covered', value: dashboardStats.modes },
+                { label: 'Updated this week', value: dashboardStats.updatedThisWeek },
+              ].map((stat, i) => (
+                <div
+                  key={stat.label}
+                  className={`rounded-xl border border-white/[0.06] bg-brand-black/60 px-4 py-3.5 shadow-inner-highlight animate-fade-up`}
+                  style={{ animationDelay: `${i * 0.06}s` }}
+                >
+                  <p className="text-[11px] font-medium uppercase tracking-[0.1em] text-white/25">{stat.label}</p>
+                  <p className="mt-1.5 text-2xl font-semibold tracking-tight text-white tabular-nums">{stat.value}</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </section>
 
+      {/* Filter bar */}
       {!loading && !isEmpty && (
-        <section className="mt-5 rounded-xl border border-gray-800 bg-brand-surface p-4">
-          <div className="flex flex-col gap-3 md:flex-row md:items-center">
-            <div className="relative w-full md:max-w-sm">
-              <svg
-                className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"
+        <section className="mt-4 p-[1px] rounded-xl bg-white/[0.04] animate-fade-up-delay-1">
+          <div className="rounded-[calc(0.75rem-1px)] bg-brand-surface px-4 py-3">
+            <div className="flex flex-col gap-2.5 md:flex-row md:items-center">
+              {/* Search */}
+              <div className="relative w-full md:max-w-xs">
+                <svg
+                  className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-white/25"
+                  fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                    d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
+                </svg>
+                <input
+                  type="text"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search strategies…"
+                  className="w-full rounded-lg border border-white/[0.07] bg-brand-black/60 py-2 pl-8 pr-3 text-[13px] text-white placeholder-white/20 transition-all duration-200 focus:outline-none focus:border-brand-yellow/40 focus:bg-brand-black"
                 />
-              </svg>
-              <input
-                type="text"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search by title or mode..."
-                className="w-full rounded-lg border border-gray-700 bg-brand-black py-2 pl-9 pr-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brand-yellow"
-              />
-            </div>
-            <select
-              value={modeFilter}
-              onChange={(e) => setModeFilter(e.target.value)}
-              className="rounded-lg border border-gray-700 bg-brand-black px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-brand-yellow md:w-56"
-            >
-              <option value="all">All modes</option>
-              {modeOptions.map((mode) => (
-                <option key={mode} value={mode}>
-                  {mode}
-                </option>
-              ))}
-            </select>
-            {hasFilters && (
-              <button
-                type="button"
-                onClick={() => {
-                  setSearch('')
-                  setModeFilter('all')
-                }}
-                className="text-sm font-medium text-gray-400 transition-colors hover:text-white"
+              </div>
+
+              {/* Mode select */}
+              <select
+                value={modeFilter}
+                onChange={(e) => setModeFilter(e.target.value)}
+                className="rounded-lg border border-white/[0.07] bg-brand-black/60 px-3 py-2 text-[13px] text-white/60 transition-all duration-200 focus:outline-none focus:border-brand-yellow/40 md:w-48"
               >
-                Clear filters
-              </button>
-            )}
+                <option value="all">All modes</option>
+                {modeOptions.map((mode) => (
+                  <option key={mode} value={mode}>{mode}</option>
+                ))}
+              </select>
+
+              {hasFilters && (
+                <button
+                  type="button"
+                  onClick={() => { setSearch(''); setModeFilter('all') }}
+                  className="text-[13px] text-white/30 transition-colors hover:text-white/70"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
           </div>
         </section>
       )}
 
       {/* Loading skeletons */}
       {loading && (
-        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="mt-5 grid grid-cols-1 gap-3.5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {Array.from({ length: 6 }).map((_, i) => (
             <StrategySkeleton key={i} />
           ))}
@@ -220,83 +232,100 @@ export default function StratsPage() {
 
       {/* Empty state */}
       {isEmpty && (
-        <div className="mt-6 flex flex-col items-center justify-center rounded-xl border border-gray-800 bg-brand-surface py-16 text-center">
-          <div className="text-5xl mb-4">🗺️</div>
-          <h2 className="text-lg font-semibold text-gray-300 mb-2">No strategies yet</h2>
-          <p className="mb-6 max-w-sm text-sm text-gray-500">
-            Build your first strategy board from a map and start saving team plans.
-          </p>
-          <Link
-            href="/maps"
-            className="rounded-lg bg-brand-yellow px-5 py-2.5 text-sm font-semibold text-black transition-colors hover:bg-yellow-400"
-          >
-            Create Strategy
-          </Link>
+        <div className="mt-5 p-[1px] rounded-2xl bg-white/[0.04]">
+          <div className="rounded-[calc(1rem-1px)] bg-brand-surface flex flex-col items-center justify-center py-20 text-center shadow-inner-highlight">
+            <div className="flex items-center justify-center w-16 h-16 rounded-2xl border border-white/[0.06] bg-brand-black/60 mb-5 text-3xl">
+              🗺️
+            </div>
+            <h2 className="text-base font-semibold text-white/80 mb-1.5">No strategies yet</h2>
+            <p className="mb-7 max-w-xs text-[13px] leading-relaxed text-white/35">
+              Build your first strategy board from a map and save your team plans.
+            </p>
+            <Link
+              href="/maps"
+              className="group inline-flex items-center gap-2.5 rounded-full bg-brand-yellow pl-5 pr-2 py-2 text-sm font-semibold text-black transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-yellow-400 active:scale-[0.98]"
+            >
+              Create a strategy
+              <span className="flex items-center justify-center w-6 h-6 rounded-full bg-black/10 group-hover:translate-x-0.5 transition-transform duration-300">
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                </svg>
+              </span>
+            </Link>
+          </div>
         </div>
       )}
 
+      {/* No results */}
       {noFilterResults && (
-        <div className="mt-6 rounded-xl border border-gray-800 bg-brand-surface p-8 text-center">
-          <p className="text-sm text-gray-400">No strategies match your current filters.</p>
+        <div className="mt-5 rounded-xl border border-white/[0.05] bg-brand-surface p-8 text-center">
+          <p className="text-[13px] text-white/30">No strategies match your filters.</p>
         </div>
       )}
 
       {/* Strategy grid */}
       {!loading && filteredStrategies.length > 0 && (
-        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {filteredStrategies.map((strategy) => (
+        <div className="mt-5 grid grid-cols-1 gap-3.5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {filteredStrategies.map((strategy, i) => (
             <div
               key={strategy.id}
-              className="group rounded-lg bg-brand-surface border border-gray-800 overflow-hidden hover:border-gray-600 transition-colors"
+              className="group animate-fade-up"
+              style={{ animationDelay: `${Math.min(i * 0.04, 0.3)}s` }}
             >
-              {/* Thumbnail */}
-              <Link href={`/strats/${strategy.id}`} className="block relative w-full aspect-video bg-gray-900">
-                <Image
-                  src={`https://cdn.brawlify.com/maps/regular/${strategy.mapId}.png`}
-                  alt={strategy.title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  onError={(e) => {
-                    // Hide broken image, show fallback bg
-                    ;(e.target as HTMLImageElement).style.display = 'none'
-                  }}
-                />
-              </Link>
+              {/* Double-bezel outer shell */}
+              <div className="p-[1px] rounded-2xl bg-gradient-to-b from-white/[0.08] to-white/[0.02] transition-all duration-400 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:from-brand-yellow/20 group-hover:to-brand-yellow/5 shadow-card">
+                <div className="rounded-[calc(1rem-1px)] bg-brand-surface overflow-hidden shadow-inner-highlight">
 
-              {/* Card body */}
-              <div className="p-3">
-                <Link href={`/strats/${strategy.id}`} className="block group/link">
-                  <h3 className="text-sm font-semibold text-white truncate group-hover/link:text-yellow-400 transition-colors">
-                    {strategy.title}
-                  </h3>
-                </Link>
-                <div className="flex items-center justify-between mt-1">
-                  <span className="text-xs text-gray-400 truncate max-w-[60%]">
-                    {strategy.gameMode}
-                  </span>
-                  <span className="text-xs text-gray-500 shrink-0 ml-2">
-                    {formatDate(strategy.modifiedAt)}
-                  </span>
-                </div>
+                  {/* Thumbnail */}
+                  <Link href={`/strats/${strategy.id}`} className="block relative w-full aspect-video bg-brand-black overflow-hidden">
+                    <Image
+                      src={`https://cdn.brawlify.com/maps/regular/${strategy.mapId}.png`}
+                      alt={strategy.title}
+                      fill
+                      className="object-cover transition-transform duration-600 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-[1.03]"
+                      sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                      onError={(e) => {
+                        ;(e.target as HTMLImageElement).style.display = 'none'
+                      }}
+                    />
+                  </Link>
 
-                <div className="mt-2 flex gap-2">
-                  <button
-                    type="button"
-                    onClick={() => handleDuplicate(strategy.id)}
-                    disabled={duplicatingId === strategy.id || deletingId === strategy.id}
-                    className="flex-1 text-xs font-medium text-brand-yellow hover:text-yellow-400 transition-colors py-1 rounded border border-gray-700 hover:border-brand-yellow-muted disabled:opacity-50"
-                  >
-                    {duplicatingId === strategy.id ? 'Duplicating…' : 'Duplicate'}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handleDelete(strategy.id, strategy.title)}
-                    disabled={deletingId === strategy.id || duplicatingId === strategy.id}
-                    className="flex-1 text-xs text-gray-500 hover:text-red-400 transition-colors py-1 rounded hover:bg-red-900/20 disabled:opacity-50"
-                  >
-                    {deletingId === strategy.id ? 'Deleting…' : 'Delete'}
-                  </button>
+                  {/* Card body */}
+                  <div className="p-3.5">
+                    <Link href={`/strats/${strategy.id}`} className="block">
+                      <h3 className="text-[13px] font-semibold text-white/80 truncate transition-colors duration-200 group-hover:text-brand-yellow leading-snug">
+                        {strategy.title}
+                      </h3>
+                    </Link>
+                    <div className="flex items-center justify-between mt-1">
+                      <span className="text-[11px] text-white/30 truncate max-w-[60%]">
+                        {strategy.gameMode}
+                      </span>
+                      <span className="text-[11px] text-white/20 shrink-0 ml-2">
+                        {formatDate(strategy.modifiedAt)}
+                      </span>
+                    </div>
+
+                    <div className="mt-3 flex gap-2 border-t border-white/[0.05] pt-3">
+                      <button
+                        type="button"
+                        onClick={() => handleDuplicate(strategy.id)}
+                        disabled={duplicatingId === strategy.id || deletingId === strategy.id}
+                        className="flex-1 text-[12px] font-medium text-brand-yellow/60 hover:text-brand-yellow transition-colors duration-200 py-1 rounded-lg border border-white/[0.06] hover:border-brand-yellow/30 hover:bg-brand-yellow/[0.06] disabled:opacity-40"
+                      >
+                        {duplicatingId === strategy.id ? 'Copying…' : 'Duplicate'}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleDelete(strategy.id, strategy.title)}
+                        disabled={deletingId === strategy.id || duplicatingId === strategy.id}
+                        className="flex-1 text-[12px] text-white/25 hover:text-red-400 transition-colors duration-200 py-1 rounded-lg hover:bg-red-900/20 disabled:opacity-40"
+                      >
+                        {deletingId === strategy.id ? 'Deleting…' : 'Delete'}
+                      </button>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>

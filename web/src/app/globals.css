@@ -72,11 +72,13 @@ body::before {
 /* ─── Premium transition utilities ─────────────────────────────────────── */
 @layer utilities {
   .transition-spring {
+    transition-property: color, background-color, border-color, opacity, box-shadow, transform, filter;
     transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
     transition-duration: 400ms;
   }
 
   .transition-spring-fast {
+    transition-property: color, background-color, border-color, opacity, box-shadow, transform, filter;
     transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
     transition-duration: 220ms;
   }

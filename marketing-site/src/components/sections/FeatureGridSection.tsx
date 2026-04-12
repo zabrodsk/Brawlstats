@@ -1,10 +1,8 @@
-import Image from "next/image";
-
 type FeatureItem = {
   num: string;
   title: string;
   description: string;
-  imageSrc: string;
+  mock: "maps" | "canvas" | "tiers" | "brawlers";
 };
 
 const FEATURES: FeatureItem[] = [
@@ -13,28 +11,28 @@ const FEATURES: FeatureItem[] = [
     title: "Maps",
     description:
       "Jump into game modes quickly and prep around the exact map you are about to play.",
-    imageSrc: "/media/screenshots/maps.png",
+    mock: "maps",
   },
   {
     num: "02",
     title: "Strategy Canvas",
     description:
       "Sketch lanes, pushes, and role assignments with a clean board built for fast planning.",
-    imageSrc: "/media/screenshots/strategy-canvas.png",
+    mock: "canvas",
   },
   {
     num: "03",
     title: "Tier Lists",
     description:
       "Maintain personal rankings by mode so your picks stay consistent with your playstyle.",
-    imageSrc: "/media/screenshots/tiers.png",
+    mock: "tiers",
   },
   {
     num: "04",
     title: "Brawlers",
     description:
       "Browse the full roster and review options in context with your maps and team ideas.",
-    imageSrc: "/media/screenshots/brawlers.png",
+    mock: "brawlers",
   },
 ];
 
@@ -57,14 +55,17 @@ export function FeatureGridSection() {
               <p className="feat-num">{feature.num}</p>
               <h3 className="feat-title">{feature.title}</h3>
               <p className="feat-desc">{feature.description}</p>
-              <div className="feat-img-wrap">
-                <Image
-                  src={feature.imageSrc}
-                  alt={`${feature.title} screenshot`}
-                  fill
-                  className="feat-img"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 560px"
-                />
+              <div className={`feat-mock feat-mock-${feature.mock}`}>
+                <div className="feat-mock-head">
+                  <span className="feat-mock-chip" />
+                  <span className="feat-mock-line feat-mock-line-short" />
+                </div>
+                <div className="feat-mock-grid">
+                  <span className="feat-mock-block" />
+                  <span className="feat-mock-block" />
+                  <span className="feat-mock-block" />
+                  <span className="feat-mock-block" />
+                </div>
               </div>
             </article>
           ))}

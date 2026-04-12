@@ -300,7 +300,7 @@ a {
   background: rgba(245, 204, 0, 0.025);
 }
 
-.feature-card:hover .feat-img {
+.feature-card:hover .feat-mock {
   transform: scale(1.025);
 }
 
@@ -343,18 +343,121 @@ a {
   margin: 0 0 1.25rem;
 }
 
-.feat-img-wrap {
+.feat-mock {
   position: relative;
   overflow: hidden;
   border-radius: 2px;
   aspect-ratio: 16 / 9;
   border: 1px solid var(--border-mid);
-  background: #0d0d0b;
+  background: linear-gradient(
+    180deg,
+    rgba(245, 204, 0, 0.08) 0%,
+    rgba(245, 204, 0, 0.01) 100%
+  );
+  padding: 0.8rem;
+  transition: transform 360ms var(--ease);
 }
 
-.feat-img {
-  object-fit: cover;
-  transition: transform 360ms var(--ease);
+.feat-mock-head {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.7rem;
+}
+
+.feat-mock-chip {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 999px;
+  background: var(--yellow);
+  opacity: 0.8;
+}
+
+.feat-mock-line {
+  display: block;
+  height: 0.35rem;
+  border-radius: 999px;
+  background: rgba(245, 204, 0, 0.22);
+}
+
+.feat-mock-line-short {
+  width: 32%;
+}
+
+.feat-mock-grid {
+  height: calc(100% - 1.5rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.45rem;
+}
+
+.feat-mock-block {
+  border: 1px solid rgba(245, 204, 0, 0.22);
+  background: rgba(245, 204, 0, 0.06);
+}
+
+.feat-mock-maps .feat-mock-grid {
+  grid-template-columns: 1.5fr 1fr;
+}
+
+.feat-mock-maps .feat-mock-block:first-child {
+  grid-row: span 2;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(245, 204, 0, 0.18) 0,
+    rgba(245, 204, 0, 0.18) 1px,
+    transparent 1px,
+    transparent 16px
+  );
+}
+
+.feat-mock-canvas .feat-mock-grid {
+  grid-template-columns: 1fr;
+}
+
+.feat-mock-canvas .feat-mock-block {
+  position: relative;
+}
+
+.feat-mock-canvas .feat-mock-block::after {
+  content: "";
+  position: absolute;
+  inset: 18% 12%;
+  border-top: 2px dashed rgba(245, 204, 0, 0.35);
+  transform: rotate(-7deg);
+}
+
+.feat-mock-tiers .feat-mock-grid {
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4, 1fr);
+}
+
+.feat-mock-tiers .feat-mock-block:nth-child(1) {
+  background: rgba(245, 204, 0, 0.18);
+}
+
+.feat-mock-tiers .feat-mock-block:nth-child(2) {
+  background: rgba(245, 204, 0, 0.13);
+}
+
+.feat-mock-tiers .feat-mock-block:nth-child(3) {
+  background: rgba(245, 204, 0, 0.09);
+}
+
+.feat-mock-brawlers .feat-mock-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.feat-mock-brawlers .feat-mock-block {
+  border-radius: 2px;
+}
+
+.feat-mock-brawlers .feat-mock-block:nth-child(1) {
+  grid-column: span 2;
+}
+
+.feat-mock-brawlers .feat-mock-block:nth-child(4) {
+  grid-column: span 2;
 }
 
 /* ─── Proof section ───────────────────────────────────────── */

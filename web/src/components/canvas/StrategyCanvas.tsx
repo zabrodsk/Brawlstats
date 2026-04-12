@@ -55,6 +55,24 @@ function MapBackground({
   const url = useMemo(() => getMapImageURL(mapId), [mapId])
   const [image, setImage] = useState<HTMLImageElement | null>(null)
   const [failed, setFailed] = useState(false)
+  const imageLayout = useMemo(() => {
+    if (!image) return null
+    const sourceWidth = image.naturalWidth || image.width
+    const sourceHeight = image.naturalHeight || image.height
+    if (sourceWidth === 0 || sourceHeight === 0) return null
+
+    // Keep map image aspect ratio to avoid stretch/squish in the canvas frame.
+    const scale = Math.min(width / sourceWidth, height / sourceHeight)
+    const drawWidth = sourceWidth * scale
+    const drawHeight = sourceHeight * scale
+
+    return {
+      x: (width - drawWidth) / 2,
+      y: (height - drawHeight) / 2,
+      width: drawWidth,
+      height: drawHeight,
+    }
+  }, [height, image, width])
 
   // Load outside `use-image`: that helper calls `img.decode()` after load. On some Safari
   // builds the decode Promise can stall, so `loaded` never fires and the map never appears.
@@ -99,14 +117,14 @@ function MapBackground({
         fill="#0D1117"
         listening={false}
       />
-      {image && (
+      {image && imageLayout && (
         <KonvaImage
           key={url}
           image={image}
-          x={0}
-          y={0}
-          width={width}
-          height={height}
+          x={imageLayout.x}
+          y={imageLayout.y}
+          width={imageLayout.width}
+          height={imageLayout.height}
           listening={false}
         />
       )}

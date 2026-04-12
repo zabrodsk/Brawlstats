@@ -12,6 +12,8 @@ import { getStrategy, saveStrategy } from '@/lib/storage'
 import { shareStrategyPng } from '@/lib/shareImage'
 import { normalizeStrategyMapId } from '@/lib/strategyMapId'
 
+export const runtime = 'edge'
+
 // Dynamically import canvas to avoid SSR issues with Konva
 const StrategyCanvas = dynamic(() => import('@/components/canvas/StrategyCanvas'), {
   ssr: false,

@@ -9,7 +9,7 @@ let package = Package(
     targets: [
         .executableTarget(
             name: "BrawlStrategy",
-            path: "BrawlStrategy",
+            path: "BrawlStats",
             resources: [
                 .process("Assets.xcassets")
             ],

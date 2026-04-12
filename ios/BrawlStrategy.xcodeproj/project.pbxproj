@@ -1,0 +1,410 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		075FA5DD5680ABE16B2C0793 /* StrategyElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90613A8A972F5D0F62D8B579 /* StrategyElement.swift */; };
+		07829A3CF8E79BD68A58D930 /* TierList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8975CDAE0E3C295FE5DAC8C8 /* TierList.swift */; };
+		1AB76CE448BEA1EDF23993BD /* BrawlStatsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB34BA012754BBCE2608879 /* BrawlStatsApp.swift */; };
+		21504CE2A6653A1DE53438D9 /* MyStratsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0E9B44ED1D1B670E61E6F2 /* MyStratsView.swift */; };
+		2507B79F413124983691026B /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3380373CB24FD5F18A3E59 /* ImageCache.swift */; };
+		2A48B4A9E05CC294524F0603 /* StrategyCanvasMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA20467C45A471D6C57BBDF /* StrategyCanvasMetrics.swift */; };
+		3B07C324B88C58B5DB62EFA2 /* Strategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F4286D87396F29D5EB73A7 /* Strategy.swift */; };
+		414BD5E14551F531143E020E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F22EB902BD047415499B1B3 /* ContentView.swift */; };
+		5755F0364D5A244F2D57ED6D /* BrawlersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6D21A28C34C20580C1C3B5 /* BrawlersView.swift */; };
+		5A74A9A86B1052F9827D4145 /* MapsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3F7E80FAD4005DAC8C86D3 /* MapsView.swift */; };
+		5BBE3DF5E8DA170BDD70FF6C /* TierListsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7299A4AAB2786DED513057B1 /* TierListsView.swift */; };
+		6B0B600C8BDEC3BBF497E634 /* CachedAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B5A0A671AC65EA8FD80667 /* CachedAsyncImage.swift */; };
+		6E9D8B1ADC3B6A50658B489B /* StrategyCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D33113228CE6DD18B38E0E2 /* StrategyCanvasView.swift */; };
+		7E2340F4F0ECD1057B41B9E3 /* HomeHubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289E3E7C5B47761FB841B7D7 /* HomeHubView.swift */; };
+		8454FE5659DE00D79B28ED13 /* BrawlerPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ED2B8A0F568B6B921CE137 /* BrawlerPickerView.swift */; };
+		90EB3B1ABA9C83248D78339C /* StrategyEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86574F6831901A109976D06E /* StrategyEditorView.swift */; };
+		A981AE19498A14F68666CAD3 /* Brawler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B420DAB373F10BA79F9D3B6 /* Brawler.swift */; };
+		AAC40BB2EA7CFDE6D750F635 /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA212D2E05827FABD775BB6B /* GameMode.swift */; };
+		B63EB77077ADA143F67023AD /* CanvasToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26020E2B58F8BEAEBEE9851 /* CanvasToolbar.swift */; };
+		D044835D6C44E4FA641DFFC1 /* BrawlifyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE23100069FE0DBFF7CED92 /* BrawlifyService.swift */; };
+		D4B308A43E52ECE2461420E0 /* GameMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EF43FCC0C9FA5AFB9BF2F1 /* GameMap.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		00B5A0A671AC65EA8FD80667 /* CachedAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedAsyncImage.swift; sourceTree = "<group>"; };
+		289E3E7C5B47761FB841B7D7 /* HomeHubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHubView.swift; sourceTree = "<group>"; };
+		2D33113228CE6DD18B38E0E2 /* StrategyCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategyCanvasView.swift; sourceTree = "<group>"; };
+		364A46FBFE13585304CC08AC /* BrawlStrategy.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = BrawlStrategy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		54EF43FCC0C9FA5AFB9BF2F1 /* GameMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMap.swift; sourceTree = "<group>"; };
+		5F3380373CB24FD5F18A3E59 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		68ED2B8A0F568B6B921CE137 /* BrawlerPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrawlerPickerView.swift; sourceTree = "<group>"; };
+		7299A4AAB2786DED513057B1 /* TierListsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierListsView.swift; sourceTree = "<group>"; };
+		7F22EB902BD047415499B1B3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		86574F6831901A109976D06E /* StrategyEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategyEditorView.swift; sourceTree = "<group>"; };
+		8975CDAE0E3C295FE5DAC8C8 /* TierList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierList.swift; sourceTree = "<group>"; };
+		90613A8A972F5D0F62D8B579 /* StrategyElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategyElement.swift; sourceTree = "<group>"; };
+		9B420DAB373F10BA79F9D3B6 /* Brawler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brawler.swift; sourceTree = "<group>"; };
+		9E3F7E80FAD4005DAC8C86D3 /* MapsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsView.swift; sourceTree = "<group>"; };
+		A2F4286D87396F29D5EB73A7 /* Strategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strategy.swift; sourceTree = "<group>"; };
+		CDB34BA012754BBCE2608879 /* BrawlStatsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrawlStatsApp.swift; sourceTree = "<group>"; };
+		CFA20467C45A471D6C57BBDF /* StrategyCanvasMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategyCanvasMetrics.swift; sourceTree = "<group>"; };
+		DB6D21A28C34C20580C1C3B5 /* BrawlersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrawlersView.swift; sourceTree = "<group>"; };
+		DF0E9B44ED1D1B670E61E6F2 /* MyStratsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStratsView.swift; sourceTree = "<group>"; };
+		F26020E2B58F8BEAEBEE9851 /* CanvasToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasToolbar.swift; sourceTree = "<group>"; };
+		FA212D2E05827FABD775BB6B /* GameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
+		FDE23100069FE0DBFF7CED92 /* BrawlifyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrawlifyService.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		05DB2072B71D18B53F9B8AF3 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				00B5A0A671AC65EA8FD80667 /* CachedAsyncImage.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		2D205BAF9AE090ED7AE000FE /* BrawlStats */ = {
+			isa = PBXGroup;
+			children = (
+				CDB34BA012754BBCE2608879 /* BrawlStatsApp.swift */,
+				7F22EB902BD047415499B1B3 /* ContentView.swift */,
+				637AE6872FFC6BA5F14FD40E /* Canvas */,
+				05DB2072B71D18B53F9B8AF3 /* Components */,
+				B7FDB33E761F5497625D65B1 /* Models */,
+				592C80B6B0B83961C19BF2C9 /* Services */,
+				EEE6F1709404B4F6203E6502 /* Views */,
+			);
+			path = BrawlStats;
+			sourceTree = "<group>";
+		};
+		592C80B6B0B83961C19BF2C9 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FDE23100069FE0DBFF7CED92 /* BrawlifyService.swift */,
+				5F3380373CB24FD5F18A3E59 /* ImageCache.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		637AE6872FFC6BA5F14FD40E /* Canvas */ = {
+			isa = PBXGroup;
+			children = (
+				68ED2B8A0F568B6B921CE137 /* BrawlerPickerView.swift */,
+				F26020E2B58F8BEAEBEE9851 /* CanvasToolbar.swift */,
+				CFA20467C45A471D6C57BBDF /* StrategyCanvasMetrics.swift */,
+				2D33113228CE6DD18B38E0E2 /* StrategyCanvasView.swift */,
+				86574F6831901A109976D06E /* StrategyEditorView.swift */,
+			);
+			path = Canvas;
+			sourceTree = "<group>";
+		};
+		6C75D7FF9D47FA4CF68D8E78 = {
+			isa = PBXGroup;
+			children = (
+				2D205BAF9AE090ED7AE000FE /* BrawlStats */,
+				878CB6AB26DEEFFBA3327E5F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		878CB6AB26DEEFFBA3327E5F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				364A46FBFE13585304CC08AC /* BrawlStrategy.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B7FDB33E761F5497625D65B1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9B420DAB373F10BA79F9D3B6 /* Brawler.swift */,
+				54EF43FCC0C9FA5AFB9BF2F1 /* GameMap.swift */,
+				FA212D2E05827FABD775BB6B /* GameMode.swift */,
+				A2F4286D87396F29D5EB73A7 /* Strategy.swift */,
+				90613A8A972F5D0F62D8B579 /* StrategyElement.swift */,
+				8975CDAE0E3C295FE5DAC8C8 /* TierList.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EEE6F1709404B4F6203E6502 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DB6D21A28C34C20580C1C3B5 /* BrawlersView.swift */,
+				289E3E7C5B47761FB841B7D7 /* HomeHubView.swift */,
+				9E3F7E80FAD4005DAC8C86D3 /* MapsView.swift */,
+				DF0E9B44ED1D1B670E61E6F2 /* MyStratsView.swift */,
+				7299A4AAB2786DED513057B1 /* TierListsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		53B6625C1B7FFB0C71235486 /* BrawlStrategy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E276F2D21C71001DDB5682D0 /* Build configuration list for PBXNativeTarget "BrawlStrategy" */;
+			buildPhases = (
+				C747095C33961F4F6DE5CD7D /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BrawlStrategy;
+			packageProductDependencies = (
+			);
+			productName = BrawlStrategy;
+			productReference = 364A46FBFE13585304CC08AC /* BrawlStrategy.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		96D4C4CCF613821F232063C6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+			};
+			buildConfigurationList = 5CE3443D681F8FC8541A8784 /* Build configuration list for PBXProject "BrawlStrategy" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 6C75D7FF9D47FA4CF68D8E78;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				53B6625C1B7FFB0C71235486 /* BrawlStrategy */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C747095C33961F4F6DE5CD7D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1AB76CE448BEA1EDF23993BD /* BrawlStatsApp.swift in Sources */,
+				A981AE19498A14F68666CAD3 /* Brawler.swift in Sources */,
+				8454FE5659DE00D79B28ED13 /* BrawlerPickerView.swift in Sources */,
+				5755F0364D5A244F2D57ED6D /* BrawlersView.swift in Sources */,
+				D044835D6C44E4FA641DFFC1 /* BrawlifyService.swift in Sources */,
+				6B0B600C8BDEC3BBF497E634 /* CachedAsyncImage.swift in Sources */,
+				B63EB77077ADA143F67023AD /* CanvasToolbar.swift in Sources */,
+				414BD5E14551F531143E020E /* ContentView.swift in Sources */,
+				D4B308A43E52ECE2461420E0 /* GameMap.swift in Sources */,
+				AAC40BB2EA7CFDE6D750F635 /* GameMode.swift in Sources */,
+				7E2340F4F0ECD1057B41B9E3 /* HomeHubView.swift in Sources */,
+				2507B79F413124983691026B /* ImageCache.swift in Sources */,
+				5A74A9A86B1052F9827D4145 /* MapsView.swift in Sources */,
+				21504CE2A6653A1DE53438D9 /* MyStratsView.swift in Sources */,
+				3B07C324B88C58B5DB62EFA2 /* Strategy.swift in Sources */,
+				2A48B4A9E05CC294524F0603 /* StrategyCanvasMetrics.swift in Sources */,
+				6E9D8B1ADC3B6A50658B489B /* StrategyCanvasView.swift in Sources */,
+				90EB3B1ABA9C83248D78339C /* StrategyEditorView.swift in Sources */,
+				075FA5DD5680ABE16B2C0793 /* StrategyElement.swift in Sources */,
+				07829A3CF8E79BD68A58D930 /* TierList.swift in Sources */,
+				5BBE3DF5E8DA170BDD70FF6C /* TierListsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		079281C6924369690980B665 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brawlstrategy.app;
+				PRODUCT_NAME = BrawlStrategy;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		23375AD273D41CBC1CAD6513 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = BrawlStats/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_MODULE_NAME = BrawlStrategy;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		30B2BD95C35B128F0AD90457 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = BrawlStats/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_MODULE_NAME = BrawlStrategy;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8F30D5C99CFF531DE5E4084D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.brawlstrategy.app;
+				PRODUCT_NAME = BrawlStrategy;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5CE3443D681F8FC8541A8784 /* Build configuration list for PBXProject "BrawlStrategy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F30D5C99CFF531DE5E4084D /* Debug */,
+				079281C6924369690980B665 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E276F2D21C71001DDB5682D0 /* Build configuration list for PBXNativeTarget "BrawlStrategy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				23375AD273D41CBC1CAD6513 /* Debug */,
+				30B2BD95C35B128F0AD90457 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 96D4C4CCF613821F232063C6 /* Project object */;
+}

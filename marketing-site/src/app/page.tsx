@@ -5,7 +5,9 @@ import { PlatformSection } from "@/components/sections/PlatformSection";
 import { ProofSection } from "@/components/sections/ProofSection";
 import { SiteFooter } from "@/components/sections/SiteFooter";
 
-const WEB_APP_URL = "https://brawlstrategy.app";
+const WEB_APP_URL =
+  process.env.NEXT_PUBLIC_DASHBOARD_URL ??
+  "https://0ca1117a.dashboardbrawlstats.pages.dev";
 const IOS_DOWNLOAD_URL = "#ios-download";
 const PRIVACY_URL = "#privacy";
 const TERMS_URL = "#terms";
@@ -13,7 +15,7 @@ const TERMS_URL = "#terms";
 export default function Home() {
   return (
     <>
-      <main className="landing-shell">
+      <main>
         <HeroSection webAppUrl={WEB_APP_URL} iosUrl={IOS_DOWNLOAD_URL} />
         <FeatureGridSection />
         <ProofSection />

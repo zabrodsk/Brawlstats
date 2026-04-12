@@ -1,9 +1,13 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
 import { AppShell } from '@/components/layout/AppShell'
 
-const inter = Inter({ subsets: ['latin'] })
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Brawl Strategy',
@@ -17,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.className} bg-brand-black text-white min-h-screen`}>
+      <body className={`${plusJakarta.variable} font-sans bg-brand-black text-white min-h-screen`}>
         <AppShell>{children}</AppShell>
       </body>
     </html>

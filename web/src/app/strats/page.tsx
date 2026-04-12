@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -41,6 +41,8 @@ export default function StratsPage() {
   const [loading, setLoading] = useState(true)
   const [deletingId, setDeletingId] = useState<string | null>(null)
   const [duplicatingId, setDuplicatingId] = useState<string | null>(null)
+  const [search, setSearch] = useState('')
+  const [modeFilter, setModeFilter] = useState<string>('all')
 
   useEffect(() => {
     getAllStrategies()
@@ -77,27 +79,139 @@ export default function StratsPage() {
     }
   }
 
+  const modeOptions = useMemo(() => {
+    const modeSet = new Set(strategies.map((s) => s.gameMode).filter(Boolean))
+    return Array.from(modeSet).sort((a, b) => a.localeCompare(b))
+  }, [strategies])
+
+  const filteredStrategies = useMemo(() => {
+    const q = search.trim().toLowerCase()
+    return strategies.filter((strategy) => {
+      const matchesSearch =
+        q.length === 0 ||
+        strategy.title.toLowerCase().includes(q) ||
+        strategy.gameMode.toLowerCase().includes(q)
+      const matchesMode = modeFilter === 'all' || strategy.gameMode === modeFilter
+      return matchesSearch && matchesMode
+    })
+  }, [modeFilter, search, strategies])
+
+  const dashboardStats = useMemo(() => {
+    const total = strategies.length
+    const modes = new Set(strategies.map((s) => s.gameMode).filter(Boolean)).size
+    const now = Date.now()
+    const weekMs = 7 * 24 * 60 * 60 * 1000
+    const updatedThisWeek = strategies.filter(
+      (s) => now - new Date(s.modifiedAt).getTime() <= weekMs
+    ).length
+    return { total, modes, updatedThisWeek }
+  }, [strategies])
+
   const isEmpty = !loading && strategies.length === 0
+  const hasFilters = search.trim().length > 0 || modeFilter !== 'all'
+  const noFilterResults = !loading && !isEmpty && filteredStrategies.length === 0
 
   return (
-    <div className="p-6 bg-brand-black min-h-full">
-      {/* Header */}
-      <div className="flex items-start justify-between mb-1">
-        <div>
-          <h1 className="text-2xl font-bold text-white">My Strategies</h1>
-          <p className="text-gray-400 mt-1">Create and manage your Brawl Stars strategies.</p>
+    <div className="min-h-full bg-brand-black px-6 py-6">
+      <section className="rounded-xl border border-gray-800 bg-[#11161C] p-5 md:p-6">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="text-xs uppercase tracking-[0.12em] text-gray-500">Strategy Dashboard</p>
+            <h1 className="mt-2 text-3xl font-bold text-white">My Strategies</h1>
+            <p className="mt-2 max-w-2xl text-sm text-gray-400">
+              Track your playbook, refine compositions, and jump back into strategy editing fast.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <Link
+              href="/maps"
+              className="inline-flex items-center rounded-lg bg-brand-yellow px-4 py-2 text-sm font-semibold text-black transition-colors hover:bg-yellow-400"
+            >
+              + New Strategy
+            </Link>
+            <Link
+              href="/maps"
+              className="inline-flex items-center rounded-lg border border-gray-700 px-4 py-2 text-sm font-medium text-gray-200 transition-colors hover:border-gray-500 hover:text-white"
+            >
+              Browse Maps
+            </Link>
+          </div>
         </div>
-        <Link
-          href="/maps"
-          className="shrink-0 px-4 py-2 rounded-lg bg-brand-yellow text-black font-semibold text-sm hover:bg-yellow-400 transition-colors"
-        >
-          + Create New
-        </Link>
-      </div>
+
+        {!loading && (
+          <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <div className="rounded-lg border border-gray-800 bg-brand-surface px-4 py-3">
+              <p className="text-xs uppercase tracking-wide text-gray-500">Total strategies</p>
+              <p className="mt-1 text-2xl font-semibold text-white">{dashboardStats.total}</p>
+            </div>
+            <div className="rounded-lg border border-gray-800 bg-brand-surface px-4 py-3">
+              <p className="text-xs uppercase tracking-wide text-gray-500">Game modes covered</p>
+              <p className="mt-1 text-2xl font-semibold text-white">{dashboardStats.modes}</p>
+            </div>
+            <div className="rounded-lg border border-gray-800 bg-brand-surface px-4 py-3">
+              <p className="text-xs uppercase tracking-wide text-gray-500">Updated this week</p>
+              <p className="mt-1 text-2xl font-semibold text-white">{dashboardStats.updatedThisWeek}</p>
+            </div>
+          </div>
+        )}
+      </section>
+
+      {!loading && !isEmpty && (
+        <section className="mt-5 rounded-xl border border-gray-800 bg-brand-surface p-4">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center">
+            <div className="relative w-full md:max-w-sm">
+              <svg
+                className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"
+                />
+              </svg>
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search by title or mode..."
+                className="w-full rounded-lg border border-gray-700 bg-brand-black py-2 pl-9 pr-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brand-yellow"
+              />
+            </div>
+            <select
+              value={modeFilter}
+              onChange={(e) => setModeFilter(e.target.value)}
+              className="rounded-lg border border-gray-700 bg-brand-black px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-brand-yellow md:w-56"
+            >
+              <option value="all">All modes</option>
+              {modeOptions.map((mode) => (
+                <option key={mode} value={mode}>
+                  {mode}
+                </option>
+              ))}
+            </select>
+            {hasFilters && (
+              <button
+                type="button"
+                onClick={() => {
+                  setSearch('')
+                  setModeFilter('all')
+                }}
+                className="text-sm font-medium text-gray-400 transition-colors hover:text-white"
+              >
+                Clear filters
+              </button>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* Loading skeletons */}
       {loading && (
-        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {Array.from({ length: 6 }).map((_, i) => (
             <StrategySkeleton key={i} />
           ))}
@@ -106,25 +220,31 @@ export default function StratsPage() {
 
       {/* Empty state */}
       {isEmpty && (
-        <div className="flex flex-col items-center justify-center py-16 text-center">
+        <div className="mt-6 flex flex-col items-center justify-center rounded-xl border border-gray-800 bg-brand-surface py-16 text-center">
           <div className="text-5xl mb-4">🗺️</div>
           <h2 className="text-lg font-semibold text-gray-300 mb-2">No strategies yet</h2>
-          <p className="text-gray-500 text-sm mb-6 max-w-xs">
-            Head to a map and tap &quot;Create Strategy&quot; to start planning.
+          <p className="mb-6 max-w-sm text-sm text-gray-500">
+            Build your first strategy board from a map and start saving team plans.
           </p>
           <Link
             href="/maps"
-            className="px-5 py-2.5 rounded-lg bg-brand-yellow text-black font-semibold text-sm hover:bg-yellow-400 transition-colors"
+            className="rounded-lg bg-brand-yellow px-5 py-2.5 text-sm font-semibold text-black transition-colors hover:bg-yellow-400"
           >
-            Browse Maps
+            Create Strategy
           </Link>
         </div>
       )}
 
+      {noFilterResults && (
+        <div className="mt-6 rounded-xl border border-gray-800 bg-brand-surface p-8 text-center">
+          <p className="text-sm text-gray-400">No strategies match your current filters.</p>
+        </div>
+      )}
+
       {/* Strategy grid */}
-      {!loading && strategies.length > 0 && (
-        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {strategies.map((strategy) => (
+      {!loading && filteredStrategies.length > 0 && (
+        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {filteredStrategies.map((strategy) => (
             <div
               key={strategy.id}
               className="group rounded-lg bg-brand-surface border border-gray-800 overflow-hidden hover:border-gray-600 transition-colors"

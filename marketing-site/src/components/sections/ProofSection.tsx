@@ -1,34 +1,41 @@
 const PROOF_ITEMS = [
-  "Map-specific prep with mode-aware navigation",
-  "Strategy flow built for speed, not clutter",
-  "Personal tier boards separated by game mode",
+  {
+    index: "01",
+    heading: "Map-specific context.",
+    body: "Mode-aware navigation puts you on the right map immediately. No hunting, no guessing — just fast prep.",
+  },
+  {
+    index: "02",
+    heading: "Built for speed.",
+    body: "The strategy flow strips out noise. Every tool is one tap away and tuned for the pre-match window.",
+  },
+  {
+    index: "03",
+    heading: "Your tier boards.",
+    body: "Personal rankings separated by game mode so your picks stay consistent with your actual playstyle.",
+  },
 ];
 
 export function ProofSection() {
   return (
-    <section className="mx-auto w-full max-w-6xl px-6 py-10 sm:px-10">
-      <div className="card-base">
-        <h2 className="text-2xl font-semibold tracking-tight text-[var(--foreground)] sm:text-3xl">
-          Built for practical, pre-match decisions.
+    <section className="proof-section">
+      <div className="section-inner">
+        <p className="section-label">Why it works</p>
+        <h2 className="section-heading">
+          Built for practical,
+          <br />
+          pre-match decisions.
         </h2>
-        <p className="mt-4 max-w-3xl text-sm leading-7 text-[var(--text-muted)] sm:text-base">
-          Brawl Strategy focuses on what helps right before a match: clear map
-          context, fast planning tools, and your own rankings. No noisy
-          dashboard, just the pieces that make picks and plans easier.
-        </p>
-        <ul className="mt-8 space-y-3">
+
+        <div className="proof-items">
           {PROOF_ITEMS.map((item) => (
-            <li key={item} className="flex items-start gap-3">
-              <span
-                className="mt-2 h-2 w-2 rounded-full bg-[var(--brand-yellow)]"
-                aria-hidden
-              />
-              <span className="text-sm text-[var(--foreground)] sm:text-base">
-                {item}
-              </span>
-            </li>
+            <div key={item.index} className="proof-item">
+              <p className="proof-index">{item.index}</p>
+              <p className="proof-stat">{item.heading}</p>
+              <p className="proof-body">{item.body}</p>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </section>
   );

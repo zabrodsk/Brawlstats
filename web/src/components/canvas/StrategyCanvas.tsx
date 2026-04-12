@@ -30,25 +30,6 @@ import type {
 } from '@/types/strategy'
 import { getMapImageURL } from '@/types/map'
 
-type DebugPayload = {
-  hypothesisId: string
-  location: string
-  message: string
-  data: Record<string, unknown>
-  timestamp: number
-}
-
-function debugLog(payload: Omit<DebugPayload, 'timestamp'>) {
-  try {
-    void fetch('/api/debug-log', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...payload, timestamp: Date.now() }),
-      keepalive: true,
-    })
-  } catch {}
-}
-
 // ---------------------------------------------------------------------------
 // Constants
 // ---------------------------------------------------------------------------
@@ -72,24 +53,41 @@ function MapBackground({
   height: number
 }) {
   const url = useMemo(() => getMapImageURL(mapId), [mapId])
-  const [image, status] = useImage(url)
-  const failed = status === 'failed'
+  const [image, setImage] = useState<HTMLImageElement | null>(null)
+  const [failed, setFailed] = useState(false)
 
+  // Load outside `use-image`: that helper calls `img.decode()` after load. On some Safari
+  // builds the decode Promise can stall, so `loaded` never fires and the map never appears.
   useEffect(() => {
-    // #region agent log
-    debugLog({
-      hypothesisId: 'B',
-      location: 'StrategyCanvas.tsx:MapBackground',
-      message: 'map image load status changed',
-      data: {
-        mapId,
-        url,
-        status,
-        hasImage: Boolean(image),
-      },
-    })
-    // #endregion
-  }, [image, mapId, status, url])
+    let cancelled = false
+    setImage(null)
+    setFailed(false)
+
+    const load = (crossOrigin: 'anonymous' | undefined) => {
+      const img = new window.Image()
+      if (crossOrigin) img.crossOrigin = crossOrigin
+      img.onload = () => {
+        if (cancelled) return
+        setFailed(false)
+        setImage(img)
+      }
+      img.onerror = () => {
+        if (cancelled) return
+        if (crossOrigin) {
+          load(undefined)
+        } else {
+          setImage(null)
+          setFailed(true)
+        }
+      }
+      img.src = url
+    }
+
+    load('anonymous')
+    return () => {
+      cancelled = true
+    }
+  }, [url])
 
   return (
     <>
@@ -345,14 +343,6 @@ const StrategyCanvas = forwardRef<StrategyCanvasHandle, StrategyCanvasProps>(
       const measure = () => {
         const w = container.clientWidth
         const h = container.clientHeight
-        // #region agent log
-        debugLog({
-          hypothesisId: 'A',
-          location: 'StrategyCanvas.tsx:measure',
-          message: 'container measured',
-          data: { width: w, height: h },
-        })
-        // #endregion
         if (w === 0 || h === 0) return
         setCanvasSize({ width: Math.floor(w), height: Math.floor(h) })
       }
@@ -375,26 +365,10 @@ const StrategyCanvas = forwardRef<StrategyCanvasHandle, StrategyCanvasProps>(
       )
       setStageScale(1)
       const total = bs * 1
-      const nextStagePos = {
+      setStagePos({
         x: (canvasSize.width - REFERENCE_WIDTH * total) / 2,
         y: (canvasSize.height - REFERENCE_HEIGHT * total) / 2,
-      }
-      setStagePos(nextStagePos)
-      // #region agent log
-      debugLog({
-        hypothesisId: 'E',
-        location: 'StrategyCanvas.tsx:fitEffect',
-        message: 'fit recalculated stage transform',
-        data: {
-          mapId,
-          canvasWidth: canvasSize.width,
-          canvasHeight: canvasSize.height,
-          baseScale: bs,
-          stageScale: 1,
-          stagePos: nextStagePos,
-        },
       })
-      // #endregion
     }, [canvasSize.width, canvasSize.height, mapId])
 
     // ---------------------------------------------------------------------------
@@ -511,18 +485,6 @@ const StrategyCanvas = forwardRef<StrategyCanvasHandle, StrategyCanvasProps>(
 
     const handleMouseDown = useCallback(
       (e: Konva.KonvaEventObject<MouseEvent>) => {
-        // #region agent log
-        debugLog({
-          hypothesisId: 'D',
-          location: 'StrategyCanvas.tsx:handleMouseDown',
-          message: 'stage mouse down received',
-          data: {
-            activeTool,
-            targetType: e.target.getClassName(),
-            isStageTarget: e.target === e.target.getStage(),
-          },
-        })
-        // #endregion
         // Deselect when clicking on stage background
         if (e.target === e.target.getStage()) {
           setSelectedId(null)
@@ -722,33 +684,6 @@ const StrategyCanvas = forwardRef<StrategyCanvasHandle, StrategyCanvasProps>(
     // ---------------------------------------------------------------------------
 
     const totalScale = baseScale * stageScale
-
-    useEffect(() => {
-      // #region agent log
-      debugLog({
-        hypothesisId: 'E',
-        location: 'StrategyCanvas.tsx:renderState',
-        message: 'stage render transform snapshot',
-        data: {
-          canvasSize,
-          stagePos,
-          stageScale,
-          baseScale,
-          totalScale,
-          activeTool,
-          elementsCount: elements.length,
-        },
-      })
-      // #endregion
-    }, [
-      activeTool,
-      baseScale,
-      canvasSize,
-      elements.length,
-      stagePos,
-      stageScale,
-      totalScale,
-    ])
 
     return (
       <div

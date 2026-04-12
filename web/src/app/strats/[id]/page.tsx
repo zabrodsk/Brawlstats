@@ -435,15 +435,16 @@ export default function EditStrategyPage() {
           )}
         </div>
 
-        {/* BrawlerPicker — desktop right */}
-        <div className="hidden md:flex shrink-0">
-          <BrawlerPicker
-            placedBrawlers={placedBrawlers}
-            onPlace={handlePlaceBrawler}
-            isOpen={true}
-            onClose={() => {}}
-          />
-        </div>
+        {/* BrawlerPicker — desktop right / mobile bottom sheet */}
+        <BrawlerPicker
+          placedBrawlers={placedBrawlers}
+          onPlace={handlePlaceBrawler}
+          isOpen={pickerOpen}
+          onClose={() => {
+            setPickerOpen(false)
+            setActiveTool('select')
+          }}
+        />
       </div>
 
       {/* Mobile toolbar — collapsible */}
@@ -484,16 +485,6 @@ export default function EditStrategyPage() {
         )}
       </div>
 
-      {/* Mobile BrawlerPicker bottom sheet */}
-      <BrawlerPicker
-        placedBrawlers={placedBrawlers}
-        onPlace={handlePlaceBrawler}
-        isOpen={pickerOpen}
-        onClose={() => {
-          setPickerOpen(false)
-          setActiveTool('select')
-        }}
-      />
     </div>
   )
 }

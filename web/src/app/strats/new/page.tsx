@@ -12,6 +12,22 @@ import { saveStrategy } from '@/lib/storage'
 import { shareStrategyPng } from '@/lib/shareImage'
 import { normalizeStrategyMapId } from '@/lib/strategyMapId'
 
+function debugLog(payload: {
+  hypothesisId: string
+  location: string
+  message: string
+  data: Record<string, unknown>
+}) {
+  try {
+    void fetch('/api/debug-log', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...payload, timestamp: Date.now() }),
+      keepalive: true,
+    })
+  } catch {}
+}
+
 // Dynamically import canvas to avoid SSR issues with Konva
 const StrategyCanvas = dynamic(() => import('@/components/canvas/StrategyCanvas'), {
   ssr: false,
@@ -70,11 +86,23 @@ function StrategyEditorInner() {
   // Canonicalize URL when mapId was missing, "0", or non-numeric (invalid CDN path).
   useEffect(() => {
     const raw = searchParams.get('mapId')
+    // #region agent log
+    debugLog({
+      hypothesisId: 'D',
+      location: 'new/page.tsx:canonicalizeMapId',
+      message: 'strategy editor map params resolved',
+      data: {
+        rawMapId: raw,
+        normalizedMapId: mapId,
+        gameMode,
+      },
+    })
+    // #endregion
     if (raw === mapId) return
     const q = new URLSearchParams(searchParams.toString())
     q.set('mapId', mapId)
     router.replace(`/strats/new?${q.toString()}`, { scroll: false })
-  }, [mapId, router, searchParams])
+  }, [gameMode, mapId, router, searchParams])
 
   const canvasRef = useRef<StrategyCanvasHandle>(null)
 
@@ -208,6 +236,21 @@ function StrategyEditorInner() {
   const placedBrawlers = elements.filter(
     (el): el is BrawlerElement => el.type === 'brawler'
   )
+
+  useEffect(() => {
+    // #region agent log
+    debugLog({
+      hypothesisId: 'C',
+      location: 'new/page.tsx:brawlerPickerState',
+      message: 'picker visibility snapshot',
+      data: {
+        pickerOpen,
+        desktopPickerAlwaysOpen: true,
+        activeTool,
+      },
+    })
+    // #endregion
+  }, [activeTool, pickerOpen])
 
   // ---------------------------------------------------------------------------
   // Render
@@ -394,15 +437,16 @@ function StrategyEditorInner() {
           />
         </div>
 
-        {/* BrawlerPicker — desktop right */}
-        <div className="hidden md:flex shrink-0">
-          <BrawlerPicker
-            placedBrawlers={placedBrawlers}
-            onPlace={handlePlaceBrawler}
-            isOpen={true}
-            onClose={() => {}}
-          />
-        </div>
+        {/* BrawlerPicker — desktop right / mobile bottom sheet */}
+        <BrawlerPicker
+          placedBrawlers={placedBrawlers}
+          onPlace={handlePlaceBrawler}
+          isOpen={pickerOpen}
+          onClose={() => {
+            setPickerOpen(false)
+            setActiveTool('select')
+          }}
+        />
       </div>
 
       {/* Mobile toolbar — collapsible */}
@@ -443,16 +487,6 @@ function StrategyEditorInner() {
         )}
       </div>
 
-      {/* Mobile BrawlerPicker bottom sheet */}
-      <BrawlerPicker
-        placedBrawlers={placedBrawlers}
-        onPlace={handlePlaceBrawler}
-        isOpen={pickerOpen}
-        onClose={() => {
-          setPickerOpen(false)
-          setActiveTool('select')
-        }}
-      />
     </div>
   )
 }

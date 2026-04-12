@@ -1,15 +1,20 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import { fetchMaps, fetchGameModes } from '@/lib/brawlify'
 import { resolveShortcutModes } from '@/lib/modeShortcuts'
 import { HomeView } from './HomeView'
 
-export default async function Home() {
-  let shortcuts: { label: string; gameModeId: number }[] = []
-  try {
-    const [maps, gameModes] = await Promise.all([fetchMaps(), fetchGameModes()])
-    shortcuts = resolveShortcutModes(gameModes, maps)
-  } catch {
-    /* shortcuts stay empty; home still renders */
-  }
+export default function Home() {
+  const [shortcuts, setShortcuts] = useState<{ label: string; gameModeId: number }[]>([])
+
+  useEffect(() => {
+    Promise.all([fetchMaps(), fetchGameModes()])
+      .then(([maps, gameModes]) => {
+        setShortcuts(resolveShortcutModes(gameModes, maps))
+      })
+      .catch(() => {})
+  }, [])
 
   return <HomeView shortcuts={shortcuts} />
 }

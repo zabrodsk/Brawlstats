@@ -5,7 +5,7 @@ import { PlatformSection } from "@/components/sections/PlatformSection";
 import { ProofSection } from "@/components/sections/ProofSection";
 import { SiteFooter } from "@/components/sections/SiteFooter";
 
-const WEB_APP_URL = "https://brawlstrategy.app";
+const WEB_APP_URL = "https://dashboardbrawlstats.pages.dev";
 const IOS_DOWNLOAD_URL = "#ios-download";
 const PRIVACY_URL = "#privacy";
 const TERMS_URL = "#terms";

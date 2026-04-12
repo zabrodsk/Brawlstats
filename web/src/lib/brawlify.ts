@@ -62,7 +62,7 @@ interface BrawlifyGameModeResponse {
 async function fetchJSON<T>(url: string): Promise<T> {
   const res = await fetch(url, {
     headers: { 'Accept': 'application/json' },
-    next: { revalidate: 300 }, // Next.js ISR-style revalidation (5 min)
+    cache: 'no-store',
   })
 
   if (!res.ok) {

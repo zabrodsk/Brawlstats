@@ -1,10 +1,10 @@
-import Image from "next/image";
-
 type FeatureItem = {
   title: string;
   description: string;
   imageSrc: string;
 };
+
+const WEB_APP_URL = "https://dashboardbrawlstats.pages.dev";
 
 const FEATURES: FeatureItem[] = [
   {
@@ -33,6 +33,13 @@ const FEATURES: FeatureItem[] = [
   },
 ];
 
+const FEATURE_LINKS: Record<string, string> = {
+  Maps: `${WEB_APP_URL}/maps`,
+  "Strategy Canvas": `${WEB_APP_URL}/strats`,
+  "Tier Lists": `${WEB_APP_URL}/tiers`,
+  Brawlers: `${WEB_APP_URL}/brawlers`,
+};
+
 export function FeatureGridSection() {
   return (
     <section className="mx-auto w-full max-w-6xl px-6 py-16 sm:px-10">
@@ -41,17 +48,18 @@ export function FeatureGridSection() {
       </h2>
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         {FEATURES.map((feature) => (
-          <article
+          <a
             key={feature.title}
-            className="card-base card-interactive min-h-[156px]"
+            href={FEATURE_LINKS[feature.title] ?? WEB_APP_URL}
+            className="card-base card-interactive min-h-[156px] block"
           >
             <div className="feature-shot-wrap">
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={feature.imageSrc}
                 alt={`${feature.title} screenshot`}
-                fill
-                className="feature-shot"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 520px"
+                className="feature-shot absolute inset-0 w-full h-full object-cover"
+                loading="lazy"
               />
             </div>
             <p className="text-lg font-semibold text-[var(--foreground)]">
@@ -60,7 +68,7 @@ export function FeatureGridSection() {
             <p className="mt-3 text-sm leading-6 text-[var(--text-muted)]">
               {feature.description}
             </p>
-          </article>
+          </a>
         ))}
       </div>
     </section>

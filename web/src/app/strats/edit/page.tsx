@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useRef, useState, useCallback, useEffect } from 'react'
-import { useParams, useRouter } from 'next/navigation'
+import React, { useRef, useState, useCallback, useEffect, Suspense } from 'react'
+import { useSearchParams, useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import type { StrategyCanvasHandle, DrawingTool } from '@/components/canvas/StrategyCanvas'
 import Toolbar from '@/components/canvas/Toolbar'
@@ -12,7 +12,6 @@ import { getStrategy, saveStrategy } from '@/lib/storage'
 import { shareStrategyPng } from '@/lib/shareImage'
 import { normalizeStrategyMapId } from '@/lib/strategyMapId'
 
-// Dynamically import canvas to avoid SSR issues with Konva
 const StrategyCanvas = dynamic(() => import('@/components/canvas/StrategyCanvas'), {
   ssr: false,
   loading: () => (
@@ -21,10 +20,6 @@ const StrategyCanvas = dynamic(() => import('@/components/canvas/StrategyCanvas'
     </div>
   ),
 })
-
-// ---------------------------------------------------------------------------
-// History helpers
-// ---------------------------------------------------------------------------
 
 function useHistory(initial: StrategyElement[]) {
   const [history, setHistory] = useState<StrategyElement[][]>([initial])
@@ -61,14 +56,10 @@ function useHistory(initial: StrategyElement[]) {
   return { present, push, undo, redo, canUndo, canRedo, reset }
 }
 
-// ---------------------------------------------------------------------------
-// Component
-// ---------------------------------------------------------------------------
-
-export default function EditStrategyPage() {
-  const params = useParams()
+function EditStrategyInner() {
+  const searchParams = useSearchParams()
   const router = useRouter()
-  const id = params.id as string
+  const id = searchParams.get('id') ?? ''
 
   const canvasRef = useRef<StrategyCanvasHandle>(null)
 
@@ -86,12 +77,12 @@ export default function EditStrategyPage() {
 
   const { present: elements, push: pushElements, undo, redo, canUndo, canRedo, reset } = useHistory([])
 
-  // ---------------------------------------------------------------------------
-  // Load strategy from IndexedDB
-  // ---------------------------------------------------------------------------
-
   useEffect(() => {
-    if (!id) return
+    if (!id) {
+      setNotFound(true)
+      setLoading(false)
+      return
+    }
     getStrategy(id)
       .then((s) => {
         if (!s) {
@@ -112,18 +103,10 @@ export default function EditStrategyPage() {
       .finally(() => setLoading(false))
   }, [id, reset])
 
-  // ---------------------------------------------------------------------------
-  // Tool change
-  // ---------------------------------------------------------------------------
-
   const handleToolChange = (tool: DrawingTool) => {
     setActiveTool(tool)
     setPickerOpen(tool === 'brawler')
   }
-
-  // ---------------------------------------------------------------------------
-  // Place brawler
-  // ---------------------------------------------------------------------------
 
   const handlePlaceBrawler = (brawler: Brawler, team: 'blue' | 'red') => {
     const cx = 1080 / 2
@@ -139,10 +122,6 @@ export default function EditStrategyPage() {
     }
     pushElements([...elements, newBrawler])
   }
-
-  // ---------------------------------------------------------------------------
-  // Save
-  // ---------------------------------------------------------------------------
 
   const handleSave = async () => {
     if (!strategy) return
@@ -162,10 +141,6 @@ export default function EditStrategyPage() {
       setSaving(false)
     }
   }
-
-  // ---------------------------------------------------------------------------
-  // Export PNG
-  // ---------------------------------------------------------------------------
 
   const handleExport = () => {
     const dataURL = canvasRef.current?.exportPNG()
@@ -190,10 +165,6 @@ export default function EditStrategyPage() {
       setShareBusy(false)
     }
   }
-
-  // ---------------------------------------------------------------------------
-  // Keyboard: undo / redo
-  // ---------------------------------------------------------------------------
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -222,10 +193,6 @@ export default function EditStrategyPage() {
     (el): el is BrawlerElement => el.type === 'brawler'
   )
 
-  // ---------------------------------------------------------------------------
-  // Loading / error states
-  // ---------------------------------------------------------------------------
-
   if (loading) {
     return (
       <div className="flex h-screen items-center justify-center bg-[#0D1117] text-gray-500 text-sm">
@@ -248,10 +215,6 @@ export default function EditStrategyPage() {
     )
   }
 
-  // ---------------------------------------------------------------------------
-  // Render
-  // ---------------------------------------------------------------------------
-
   const mobileActiveToolLabel =
     activeTool === 'select'
       ? 'Select'
@@ -263,7 +226,6 @@ export default function EditStrategyPage() {
 
   return (
     <div className="flex flex-col h-screen bg-[#0D1117] overflow-hidden">
-      {/* Top bar — tablet/desktop */}
       <header className="hidden md:flex items-center gap-3 px-4 py-2 bg-[#161B22] border-b border-gray-700 shrink-0">
         <button
           onClick={() => router.back()}
@@ -308,7 +270,6 @@ export default function EditStrategyPage() {
         </div>
       </header>
 
-      {/* Top bar — phone (collapsible) */}
       <header className="flex md:hidden flex-col shrink-0 bg-[#161B22] border-b border-gray-700">
         {mobileHeaderExpanded ? (
           <div className="relative px-3 pt-2 pb-3">
@@ -407,9 +368,7 @@ export default function EditStrategyPage() {
         )}
       </header>
 
-      {/* Main area */}
       <div className="flex flex-1 min-h-0 overflow-hidden gap-2 p-2">
-        {/* Toolbar — desktop left */}
         <div className="hidden md:flex items-start pt-1 shrink-0">
           <Toolbar
             activeTool={activeTool}
@@ -421,7 +380,6 @@ export default function EditStrategyPage() {
           />
         </div>
 
-        {/* Canvas */}
         <div className="flex-1 min-h-0 min-w-0 h-full rounded-lg overflow-hidden">
           {strategy && (
             <StrategyCanvas
@@ -435,7 +393,6 @@ export default function EditStrategyPage() {
           )}
         </div>
 
-        {/* BrawlerPicker — desktop right */}
         <div className="hidden md:flex shrink-0">
           <BrawlerPicker
             placedBrawlers={placedBrawlers}
@@ -446,7 +403,6 @@ export default function EditStrategyPage() {
         </div>
       </div>
 
-      {/* Mobile toolbar — collapsible */}
       <div className="md:hidden shrink-0 border-t border-gray-800 bg-[#0D1117]">
         {mobileToolbarExpanded ? (
           <div className="relative pt-1">
@@ -484,7 +440,6 @@ export default function EditStrategyPage() {
         )}
       </div>
 
-      {/* Mobile BrawlerPicker bottom sheet */}
       <BrawlerPicker
         placedBrawlers={placedBrawlers}
         onPlace={handlePlaceBrawler}
@@ -495,5 +450,19 @@ export default function EditStrategyPage() {
         }}
       />
     </div>
+  )
+}
+
+export default function EditStrategyPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex h-screen items-center justify-center bg-[#0D1117] text-gray-500 text-sm">
+          Loading…
+        </div>
+      }
+    >
+      <EditStrategyInner />
+    </Suspense>
   )
 }

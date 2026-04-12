@@ -1,0 +1,55 @@
+name: BrawlStrategy
+
+options:
+  bundleIdPrefix: com.brawlstrategy
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: 5.9
+    PRODUCT_NAME: BrawlStrategy
+    PRODUCT_BUNDLE_IDENTIFIER: com.brawlstrategy.app
+    TARGETED_DEVICE_FAMILY: "1,2"
+    SUPPORTS_MACCATALYST: NO
+    GENERATE_INFOPLIST_FILE: NO
+
+targets:
+  BrawlStrategy:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    info:
+      path: BrawlStrategy/Info.plist
+    sources:
+      - path: BrawlStrategy
+        excludes:
+          - Assets.xcassets
+          - Info.plist
+          - LaunchScreen.storyboard
+    resources:
+      - path: BrawlStrategy/Assets.xcassets
+      - path: BrawlStrategy/LaunchScreen.storyboard
+    settings:
+      base:
+        INFOPLIST_FILE: BrawlStrategy/Info.plist
+        PRODUCT_MODULE_NAME: BrawlStrategy
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+
+schemes:
+  BrawlStrategy:
+    build:
+      targets:
+        BrawlStrategy: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release

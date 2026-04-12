@@ -1,0 +1,226 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Brawl Strategy",
+  "description": "Strategy canvas data format for the Brawl Stars strategy app. Used on both iOS (SwiftData) and Web (IndexedDB).",
+  "type": "object",
+  "required": ["id", "version", "mapId", "gameMode", "title", "createdAt", "modifiedAt", "canvasSize", "elements"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 1
+    },
+    "mapId": {
+      "type": "string",
+      "description": "Maps to CDN URL: https://cdn.brawlify.com/maps/regular/{mapId}.png"
+    },
+    "gameMode": {
+      "type": "string",
+      "description": "Game mode slug (e.g., gemGrab, brawlBall, showdown)"
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modifiedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "canvasSize": {
+      "type": "object",
+      "required": ["width", "height"],
+      "properties": {
+        "width": {
+          "type": "integer",
+          "default": 1080
+        },
+        "height": {
+          "type": "integer",
+          "default": 1920
+        }
+      }
+    },
+    "elements": {
+      "type": "array",
+      "description": "Z-ordered array of canvas elements (index = render order)",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "description": "A brawler token placed on the map",
+            "required": ["id", "type", "brawlerId", "team", "position"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "type": {
+                "const": "brawler"
+              },
+              "brawlerId": {
+                "type": "string",
+                "description": "Maps to CDN: https://cdn.brawlify.com/brawlers/borderless/{brawlerId}.png"
+              },
+              "team": {
+                "type": "string",
+                "enum": ["blue", "red", "yellow", "neutral"]
+              },
+              "position": {
+                "$ref": "#/definitions/position"
+              },
+              "scale": {
+                "type": "number",
+                "default": 1.0
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "description": "A directional arrow drawn on the map",
+            "required": ["id", "type", "color", "points"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "type": {
+                "const": "arrow"
+              },
+              "color": {
+                "type": "string",
+                "pattern": "^#[0-9a-fA-F]{6}$"
+              },
+              "points": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/position"
+                },
+                "minItems": 2
+              },
+              "strokeWidth": {
+                "type": "number",
+                "default": 3
+              },
+              "dashed": {
+                "type": "boolean",
+                "default": false
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "description": "A highlighted zone (circle or rectangle) on the map",
+            "required": ["id", "type", "shape", "color", "center"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "type": {
+                "const": "zone"
+              },
+              "shape": {
+                "type": "string",
+                "enum": ["circle", "rectangle"]
+              },
+              "color": {
+                "type": "string",
+                "pattern": "^#[0-9a-fA-F]{6}$"
+              },
+              "center": {
+                "$ref": "#/definitions/position"
+              },
+              "radius": {
+                "type": "number",
+                "description": "Used when shape is circle"
+              },
+              "size": {
+                "$ref": "#/definitions/size",
+                "description": "Used when shape is rectangle"
+              },
+              "opacity": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1,
+                "default": 0.3
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "description": "A text label placed on the map",
+            "required": ["id", "type", "content", "position"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "type": {
+                "const": "text"
+              },
+              "content": {
+                "type": "string",
+                "maxLength": 200
+              },
+              "color": {
+                "type": "string",
+                "pattern": "^#[0-9a-fA-F]{6}$",
+                "default": "#ffffff"
+              },
+              "position": {
+                "$ref": "#/definitions/position"
+              },
+              "fontSize": {
+                "type": "integer",
+                "minimum": 8,
+                "maximum": 96,
+                "default": 16
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "position": {
+      "type": "object",
+      "description": "Coordinates normalized to 1080x1920 reference canvas",
+      "required": ["x", "y"],
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    },
+    "size": {
+      "type": "object",
+      "required": ["width", "height"],
+      "properties": {
+        "width": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

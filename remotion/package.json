@@ -1,0 +1,21 @@
+{
+  "name": "brawlstats-remotion",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npx remotion studio",
+    "render:mp4": "npx remotion render HeroBg out/hero-bg.mp4 --codec=h264",
+    "render:webm": "npx remotion render HeroBg out/hero-bg.webm --codec=vp8"
+  },
+  "dependencies": {
+    "remotion": "^4.0.290",
+    "@remotion/cli": "^4.0.290",
+    "@remotion/renderer": "^4.0.290",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "typescript": "^5.0.0"
+  }
+}

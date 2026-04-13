@@ -1,0 +1,7 @@
+# Cloudflare Pages — https://dashboardbrawlstats.pages.dev
+# Dashboard: connect this repo with root directory `web`, build `npm run pages:build`,
+# output directory `.vercel/output/static` (must match `pages_build_output_dir` below).
+name = "dashboardbrawlstats"
+compatibility_date = "2026-04-12"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"

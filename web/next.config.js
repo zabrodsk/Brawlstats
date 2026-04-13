@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
+  // Do not use `output: 'standalone'` here — it breaks `@cloudflare/next-on-pages`
+  // (Cloudflare Pages / dashboardbrawlstats.pages.dev).
   images: {
     remotePatterns: [
       {

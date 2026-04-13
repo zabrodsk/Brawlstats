@@ -4,6 +4,7 @@ node_modules/
 # Next.js / TypeScript
 web/.next/
 web/out/
+web/.vercel/
 *.tsbuildinfo
 
 # Env and secrets

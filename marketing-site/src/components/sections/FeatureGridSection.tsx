@@ -5,6 +5,7 @@ type FeatureItem = {
   title: string;
   description: string;
   imageSrc: string;
+  imagePosition: string;
 };
 
 const FEATURES: FeatureItem[] = [
@@ -14,6 +15,7 @@ const FEATURES: FeatureItem[] = [
     description:
       "Jump into game modes quickly and prep around the exact map you are about to play.",
     imageSrc: "/media/screenshots/maps.png",
+    imagePosition: "object-center",
   },
   {
     num: "02",
@@ -21,6 +23,7 @@ const FEATURES: FeatureItem[] = [
     description:
       "Sketch lanes, pushes, and role assignments with a clean board built for fast planning.",
     imageSrc: "/media/screenshots/strategy-canvas.png",
+    imagePosition: "object-[50%_35%]",
   },
   {
     num: "03",
@@ -28,6 +31,7 @@ const FEATURES: FeatureItem[] = [
     description:
       "Maintain personal rankings by mode so your picks stay consistent with your playstyle.",
     imageSrc: "/media/screenshots/tiers.png",
+    imagePosition: "object-[50%_20%]",
   },
   {
     num: "04",
@@ -35,6 +39,7 @@ const FEATURES: FeatureItem[] = [
     description:
       "Browse the full roster and review options in context with your maps and team ideas.",
     imageSrc: "/media/screenshots/brawlers.png",
+    imagePosition: "object-[50%_14%]",
   },
 ];
 
@@ -57,12 +62,12 @@ export function FeatureGridSection() {
               <p className="feat-num">{feature.num}</p>
               <h3 className="feat-title">{feature.title}</h3>
               <p className="feat-desc">{feature.description}</p>
-              <div className="feat-img-wrap">
+              <div className="feat-shot-frame">
                 <Image
                   src={feature.imageSrc}
                   alt={`${feature.title} screenshot`}
                   fill
-                  className="feat-img"
+                  className={`feat-shot ${feature.imagePosition}`}
                   sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 560px"
                 />
               </div>

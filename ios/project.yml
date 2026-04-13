@@ -22,15 +22,12 @@ targets:
     deploymentTarget: "17.0"
     info:
       path: BrawlStats/Info.plist
+      properties:
+        UILaunchStoryboardName: LaunchScreen
     sources:
       - path: BrawlStats
         excludes:
-          - Assets.xcassets
           - Info.plist
-          - LaunchScreen.storyboard
-    resources:
-      - path: BrawlStats/Assets.xcassets
-      - path: BrawlStats/LaunchScreen.storyboard
     settings:
       base:
         INFOPLIST_FILE: BrawlStats/Info.plist

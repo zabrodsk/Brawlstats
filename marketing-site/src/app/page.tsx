@@ -7,7 +7,7 @@ import { SiteFooter } from "@/components/sections/SiteFooter";
 
 const WEB_APP_URL =
   process.env.NEXT_PUBLIC_DASHBOARD_URL ??
-  "https://a953426f.dashboardbrawlstats.pages.dev";
+  "https://dashboardbrawlstats.pages.dev";
 const IOS_DOWNLOAD_URL = "https://testflight.apple.com/join/EwA2muWc";
 const PRIVACY_URL = "#privacy";
 const TERMS_URL = "#terms";

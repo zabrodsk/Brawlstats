@@ -1,0 +1,18 @@
+{
+  "runtime": "edge",
+  "name": "strats/[id]",
+  "deploymentTarget": "v8-worker",
+  "entrypoint": "index.js",
+  "assets": [],
+  "framework": {
+    "slug": "nextjs",
+    "version": "14.2.35"
+  },
+  "environment": {
+    "__NEXT_BUILD_ID": "zogtZBk8HwlIr-EyGvJH7",
+    "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "0kLPnsauMcAkEEuzAq5Lx4n+bUJJYReiS7Kkkm5wJVQ=",
+    "__NEXT_PREVIEW_MODE_ID": "6dc5736a01bdbd934ad45a10dd40b1e3",
+    "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "9aabf78f1542610e524b2c975ad28440bcbbe928c685306e8bd1d380c8adcec7",
+    "__NEXT_PREVIEW_MODE_SIGNING_KEY": "8e417c8b5e745b3b8cd67791d8f1710f8ec3097ef90918e80c798d844cbcd0d2"
+  }
+}

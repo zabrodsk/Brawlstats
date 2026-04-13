@@ -20,7 +20,9 @@ export function HeroSection({ webAppUrl, iosUrl }: HeroSectionProps) {
       <div className="hero-main">
         <div className="hero-eyebrow">
           <span className="hero-eyebrow-bar" aria-hidden="true" />
-          <span className="hero-eyebrow-text">Map-First Strategy Tool</span>
+          <span className="hero-eyebrow-text">
+            Map-First Strategy for Brawl Stars
+          </span>
         </div>
 
         <h1 className="hero-headline">
@@ -30,8 +32,8 @@ export function HeroSection({ webAppUrl, iosUrl }: HeroSectionProps) {
 
         <p className="hero-body">
           Browse maps, build team plans on a tactical canvas, and keep personal
-          tier lists in one place. Designed for players who want cleaner prep
-          and faster decision-making.
+          tier lists in one place. Designed for Brawl Stars players who want
+          cleaner prep and faster draft decisions.
         </p>
 
         <div className="hero-actions">

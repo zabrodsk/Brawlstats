@@ -24,7 +24,7 @@ export function ProofSection() {
         <h2 className="section-heading">
           Built for practical,
           <br />
-          pre-match decisions.
+          Brawl Stars decisions.
         </h2>
 
         <div className="proof-items">

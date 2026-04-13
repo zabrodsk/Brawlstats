@@ -726,6 +726,11 @@ const StrategyCanvas = forwardRef<StrategyCanvasHandle, StrategyCanvasProps>(
           onTouchEnd={handleTouchEnd}
           draggable={activeTool === 'select'}
           onDragEnd={(e) => {
+            // Konva bubbles dragend from descendants. Only apply position when the
+            // stage itself was dragged — otherwise brawler/zone coords overwrite
+            // stagePos and the entire canvas pans off-screen.
+            const stage = stageRef.current
+            if (!stage || e.target !== stage) return
             setStagePos({ x: e.target.x(), y: e.target.y() })
           }}
         >

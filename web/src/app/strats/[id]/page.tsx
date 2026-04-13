@@ -129,7 +129,7 @@ export default function EditStrategyPage() {
 
   const handlePlaceBrawler = (brawler: Brawler, team: 'blue' | 'red') => {
     const cx = 1080 / 2
-    const cy = 1920 / 2
+    const cy = 1080 / 2
     const newBrawler: BrawlerElement = {
       type: 'brawler',
       id: `brawler-${Date.now()}-${brawler.id}`,

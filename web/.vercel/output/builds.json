@@ -6,7 +6,7 @@
     "/Users/dusanzabrodsky/.npm/_npx/69f9afb961c37556/node_modules/.bin/vc",
     "build"
   ],
-  "cliVersion": "50.44.0",
+  "cliVersion": "51.1.0",
   "builds": [
     {
       "require": "@vercel/next",

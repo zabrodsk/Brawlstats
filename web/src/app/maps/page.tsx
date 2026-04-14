@@ -92,6 +92,17 @@ function MapsPageInner() {
 
   useEffect(() => {
     if (loading || maps.length === 0) return
+    const mapIdRaw = searchParams.get('mapId')
+    if (mapIdRaw != null && mapIdRaw !== '') {
+      const mapIdNum = parseInt(mapIdRaw, 10)
+      if (Number.isFinite(mapIdNum)) {
+        const found = maps.find((m) => m.id === mapIdNum)
+        if (found && validModeIds.has(found.gameModeId)) {
+          setModeFilter(found.gameModeId)
+          return
+        }
+      }
+    }
     const raw = searchParams.get('mode')
     if (raw == null || raw === '') {
       setModeFilter('all')
@@ -103,15 +114,24 @@ function MapsPageInner() {
       return
     }
     setModeFilter(id)
-  }, [loading, maps.length, searchParams, validModeIds])
+  }, [loading, maps.length, maps, searchParams, validModeIds])
 
   useEffect(() => {
-    if (loading || modeFilter === 'all') return
+    if (loading) return
+    const mapIdRaw = searchParams.get('mapId')
+    if (mapIdRaw != null && mapIdRaw !== '') {
+      const el = document.getElementById(`map-${mapIdRaw}`)
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        return
+      }
+    }
+    if (modeFilter === 'all') return
     const el = document.getElementById(`mode-${modeFilter}`)
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
-  }, [loading, modeFilter, maps.length])
+  }, [loading, modeFilter, maps.length, searchParams])
 
   const setModeAndUrl = (next: number | 'all') => {
     setModeFilter(next)
@@ -256,7 +276,8 @@ function MapsPageInner() {
                 {modeMaps.map((map) => (
                   <div
                     key={map.id}
-                    className="group"
+                    id={`map-${map.id}`}
+                    className="group scroll-mt-28"
                   >
                     {/* Double-bezel outer shell */}
                     <div className="p-[1px] rounded-2xl bg-gradient-to-b from-white/[0.07] to-white/[0.02] transition-all duration-400 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:from-brand-yellow/15 group-hover:to-brand-yellow/5 shadow-card">

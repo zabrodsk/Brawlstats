@@ -124,6 +124,46 @@
       "status": 404
     },
     {
+      "src": "^/api/brawlstars/clubs/(?<nxtPclubTag>[^/]+?)(?:\\.rsc)(?:/)?$",
+      "dest": "/api/brawlstars/clubs/[clubTag].rsc?nxtPclubTag=$nxtPclubTag"
+    },
+    {
+      "src": "^/api/brawlstars/clubs/(?<nxtPclubTag>[^/]+?)(?:/)?$",
+      "dest": "/api/brawlstars/clubs/[clubTag]?nxtPclubTag=$nxtPclubTag"
+    },
+    {
+      "src": "^/api/brawlstars/clubs/(?<nxtPclubTag>[^/]+?)/members(?:\\.rsc)(?:/)?$",
+      "dest": "/api/brawlstars/clubs/[clubTag]/members.rsc?nxtPclubTag=$nxtPclubTag"
+    },
+    {
+      "src": "^/api/brawlstars/clubs/(?<nxtPclubTag>[^/]+?)/members(?:/)?$",
+      "dest": "/api/brawlstars/clubs/[clubTag]/members?nxtPclubTag=$nxtPclubTag"
+    },
+    {
+      "src": "^/api/brawlstars/players/(?<nxtPplayerTag>[^/]+?)(?:\\.rsc)(?:/)?$",
+      "dest": "/api/brawlstars/players/[playerTag].rsc?nxtPplayerTag=$nxtPplayerTag"
+    },
+    {
+      "src": "^/api/brawlstars/players/(?<nxtPplayerTag>[^/]+?)(?:/)?$",
+      "dest": "/api/brawlstars/players/[playerTag]?nxtPplayerTag=$nxtPplayerTag"
+    },
+    {
+      "src": "^/api/brawlstars/players/(?<nxtPplayerTag>[^/]+?)/battlelog(?:\\.rsc)(?:/)?$",
+      "dest": "/api/brawlstars/players/[playerTag]/battlelog.rsc?nxtPplayerTag=$nxtPplayerTag"
+    },
+    {
+      "src": "^/api/brawlstars/players/(?<nxtPplayerTag>[^/]+?)/battlelog(?:/)?$",
+      "dest": "/api/brawlstars/players/[playerTag]/battlelog?nxtPplayerTag=$nxtPplayerTag"
+    },
+    {
+      "src": "^/api/brawlstars/players/(?<nxtPplayerTag>[^/]+?)/worst\\-counter(?:\\.rsc)(?:/)?$",
+      "dest": "/api/brawlstars/players/[playerTag]/worst-counter.rsc?nxtPplayerTag=$nxtPplayerTag"
+    },
+    {
+      "src": "^/api/brawlstars/players/(?<nxtPplayerTag>[^/]+?)/worst\\-counter(?:/)?$",
+      "dest": "/api/brawlstars/players/[playerTag]/worst-counter?nxtPplayerTag=$nxtPplayerTag"
+    },
+    {
       "src": "^/strats/(?<nxtPid>[^/]+?)(?:\\.rsc)(?:/)?$",
       "dest": "/strats/[id].rsc?nxtPid=$nxtPid"
     },
@@ -135,7 +175,7 @@
       "handle": "hit"
     },
     {
-      "src": "/_next/static/(?:[^/]+/pages|pages|chunks|runtime|css|image|media|zogtZBk8HwlIr\\-EyGvJH7)/.+",
+      "src": "/_next/static/(?:[^/]+/pages|pages|chunks|runtime|css|image|media|C\\-\\-5rhUo4DT2XeR2PqBnA)/.+",
       "headers": {
         "cache-control": "public,max-age=31536000,immutable"
       },

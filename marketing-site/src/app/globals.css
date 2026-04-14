@@ -767,3 +767,69 @@ a {
     scroll-behavior: auto !important;
   }
 }
+
+
+/* ─── API update section ──────────────────────────────────── */
+.api-update-section {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.api-update-grid {
+  display: grid;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .api-update-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.api-update-card {
+  background: var(--bg);
+  padding: 1.5rem;
+  transition: background-color 180ms var(--ease);
+}
+
+.api-update-card:hover {
+  background-color: rgba(245, 204, 0, 0.025);
+}
+
+.api-update-index {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 900;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  margin: 0 0 0.75rem;
+}
+
+.api-update-title {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.75rem;
+}
+
+.api-update-body {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--muted-light);
+}
+
+.api-update-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: flex-start;
+}

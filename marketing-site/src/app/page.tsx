@@ -1,3 +1,4 @@
+import { ApiUpdateSection } from "@/components/sections/ApiUpdateSection";
 import { FeatureGridSection } from "@/components/sections/FeatureGridSection";
 import { FinalCtaSection } from "@/components/sections/FinalCtaSection";
 import { HeroSection } from "@/components/sections/HeroSection";
@@ -20,6 +21,7 @@ export default function Home() {
         <FeatureGridSection />
         <ProofSection />
         <PlatformSection />
+        <ApiUpdateSection webAppUrl={WEB_APP_URL} />
         <FinalCtaSection webAppUrl={WEB_APP_URL} iosUrl={IOS_DOWNLOAD_URL} />
       </main>
       <SiteFooter privacyUrl={PRIVACY_URL} termsUrl={TERMS_URL} />

@@ -1,0 +1,1 @@
+var o={},d=(u,a,p)=>(o.__chunk_2643=(_,l,c)=>{"use strict";function r(n){let e=n.trim();if(!e)return null;let t=e;try{t=decodeURIComponent(t)}catch{}return(t=t.replace(/^#/,"").toUpperCase().replace(/[^0-9A-Z]/g,"")).length<3?null:`#${t}`}function s(n){let e=r(n);return e?encodeURIComponent(e):""}c.d(l,{B:()=>s,c:()=>r})},o);export{d as __getNamedExports};

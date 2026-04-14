@@ -1,0 +1,27 @@
+{
+  "type": "Prerender",
+  "expiration": false,
+  "group": 6,
+  "bypassToken": "0f12d0fd1349a99d23fa4b75acfa0735",
+  "experimentalBypassFor": [
+    {
+      "type": "header",
+      "key": "Next-Action"
+    },
+    {
+      "type": "header",
+      "key": "content-type",
+      "value": "multipart/form-data;.*"
+    }
+  ],
+  "fallback": {
+    "type": "FileFsRef",
+    "mode": 33188,
+    "fsPath": "my-club.prerender-fallback.html"
+  },
+  "initialHeaders": {
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/my-club/layout,_N_T_/my-club/page,_N_T_/my-club",
+    "vary": "RSC, Next-Router-State-Tree, Next-Router-Prefetch"
+  },
+  "allowQuery": []
+}

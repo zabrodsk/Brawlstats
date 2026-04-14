@@ -42,6 +42,7 @@ private struct iPhoneLayout: View {
                 onOpenBrawlers: { selectedTab = 2 },
                 onOpenTiers: { selectedTab = 3 },
                 onOpenStrats: { selectedTab = 4 },
+                onOpenAccount: { selectedTab = 6 },
                 onJumpToMapsMode: { mode in
                     mapsQuickRequest = mode
                     selectedTab = 1
@@ -75,6 +76,18 @@ private struct iPhoneLayout: View {
                     Label("My Strats", systemImage: "folder.fill")
                 }
                 .tag(4)
+
+            MyClubView()
+                .tabItem {
+                    Label("My Club", systemImage: "person.3.sequence.fill")
+                }
+                .tag(5)
+
+            AccountView()
+                .tabItem {
+                    Label("Account", systemImage: "person.crop.circle")
+                }
+                .tag(6)
         }
     }
 }
@@ -102,6 +115,7 @@ private struct iPadLayout: View {
                     onOpenBrawlers: { selectedTab = .brawlers },
                     onOpenTiers: { selectedTab = .tiers },
                     onOpenStrats: { selectedTab = .myStrats },
+                    onOpenAccount: { selectedTab = .account },
                     onJumpToMapsMode: { mode in
                         mapsQuickRequest = mode
                         selectedTab = .maps
@@ -115,6 +129,10 @@ private struct iPadLayout: View {
                 TierListsView()
             case .myStrats:
                 MyStratsView()
+            case .club:
+                MyClubView()
+            case .account:
+                AccountView()
             }
         }
     }
@@ -128,6 +146,8 @@ enum AppTab: String, CaseIterable {
     case brawlers
     case tiers
     case myStrats
+    case club
+    case account
 
     var title: String {
         switch self {
@@ -136,6 +156,8 @@ enum AppTab: String, CaseIterable {
         case .brawlers: return "Brawlers"
         case .tiers: return "Tiers"
         case .myStrats: return "My Strats"
+        case .club: return "My Club"
+        case .account: return "Account"
         }
     }
 
@@ -146,6 +168,8 @@ enum AppTab: String, CaseIterable {
         case .brawlers: return "person.3.fill"
         case .tiers: return "list.star"
         case .myStrats: return "folder.fill"
+        case .club: return "person.3.sequence.fill"
+        case .account: return "person.crop.circle"
         }
     }
 }

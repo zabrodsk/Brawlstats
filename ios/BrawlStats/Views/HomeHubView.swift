@@ -5,16 +5,36 @@ struct HomeHubView: View {
     var onOpenBrawlers: () -> Void
     var onOpenTiers: () -> Void
     var onOpenStrats: () -> Void
+    var onOpenAccount: () -> Void
     var onJumpToMapsMode: (MapsQuickMode) -> Void
+
+    @AppStorage("brawlStarsApiBaseURL") private var apiBaseURL: String = ""
+    @AppStorage("brawlStarsPlayerTag") private var savedPlayerTag: String = ""
 
     @State private var mapsForCounts: [GameMap] = []
     @State private var countsLoading = false
+    @State private var rotationSlots: [RotationSlot] = []
+    @State private var rotationError: String?
+    @State private var finderTagDraft: String = ""
+    @State private var selectedRotationSlot: RotationSlot?
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
                     hero
+
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Current rotation")
+                            .font(.title3.weight(.semibold))
+                        currentRotation
+                    }
+
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Find profile")
+                            .font(.title3.weight(.semibold))
+                        profileFinder
+                    }
 
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Jump in")
@@ -35,10 +55,17 @@ struct HomeHubView: View {
             .navigationTitle("Home")
             .navigationBarTitleDisplayMode(.large)
             .task {
-                await loadMapCounts()
+                finderTagDraft = savedPlayerTag
+                await loadHomeData()
             }
             .refreshable {
-                await loadMapCounts()
+                await loadHomeData()
+            }
+            .fullScreenCover(item: $selectedRotationSlot) { slot in
+                StrategyEditorView(
+                    initialMapId: slot.mapId ?? "",
+                    initialGameMode: slot.mode
+                )
             }
         }
     }
@@ -192,6 +219,100 @@ struct HomeHubView: View {
         .buttonStyle(PressScaleButtonStyle())
     }
 
+    private var profileFinder: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Jump directly to Account dashboard with player + club data.")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            Text("Supercell API does not support global player-name search yet, so use player tag.")
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+
+            HStack(spacing: 8) {
+                TextField("#PLAYER…", text: $finderTagDraft)
+                    .textInputAutocapitalization(.characters)
+                    .autocorrectionDisabled()
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 10)
+                    .background(Color(.secondarySystemGroupedBackground))
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+
+                Button("Open") {
+                    if let normalized = normalizedTag(finderTagDraft) {
+                        savedPlayerTag = normalized
+                    }
+                    onOpenAccount()
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(Color(red: 1, green: 0.84, blue: 0.2))
+                .foregroundStyle(.black)
+            }
+        }
+        .padding(14)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color(.secondarySystemGroupedBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 14))
+        .overlay(
+            RoundedRectangle(cornerRadius: 14)
+                .strokeBorder(Color.primary.opacity(0.06), lineWidth: 1)
+        )
+    }
+
+    private var currentRotation: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            if let rotationError {
+                Text(rotationError)
+                    .font(.caption)
+                    .foregroundStyle(.orange)
+            }
+
+            if rotationSlots.isEmpty {
+                Text("No live rotation yet. Set your API base URL in Account to enable this feed.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            } else {
+                ForEach(rotationSlots.prefix(6)) { slot in
+                    HStack(alignment: .top, spacing: 12) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(slot.mapName)
+                                .font(.subheadline.weight(.semibold))
+                            Text(slot.mode)
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                        Spacer(minLength: 0)
+                        if slot.mapId != nil {
+                            Button("Open") {
+                                selectedRotationSlot = slot
+                            }
+                            .font(.caption.weight(.semibold))
+                            .buttonStyle(.bordered)
+                        }
+                    }
+                    .padding(12)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(Color(.secondarySystemGroupedBackground))
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                }
+            }
+        }
+    }
+
+    private func normalizedTag(_ raw: String) -> String? {
+        var s = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+        if s.isEmpty { return nil }
+        s = s.replacingOccurrences(of: "#", with: "")
+        let filtered = String(s.uppercased().filter { $0.isLetter || $0.isNumber })
+        guard filtered.count >= 3 else { return nil }
+        return "#" + filtered
+    }
+
+    private func loadHomeData() async {
+        async let mapsTask: Void = loadMapCounts()
+        async let rotationTask: Void = loadRotation()
+        _ = await (mapsTask, rotationTask)
+    }
+
     private func loadMapCounts() async {
         countsLoading = true
         defer { countsLoading = false }
@@ -203,6 +324,62 @@ struct HomeHubView: View {
             }
         }
     }
+
+    private func loadRotation() async {
+        rotationError = nil
+
+        let trimmed = apiBaseURL.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let url = URL(string: trimmed), let scheme = url.scheme, (scheme == "https" || scheme == "http") else {
+            rotationSlots = []
+            if !trimmed.isEmpty {
+                rotationError = "API base URL is invalid. Open Account to fix it."
+            }
+            return
+        }
+
+        do {
+            let client = BrawlStarsAPIClient(baseURL: url)
+            let any = try await client.getJSONObject(path: "/api/brawlstars/events/rotation")
+            rotationSlots = parseRotation(any).prefix(12).map { $0 }
+        } catch {
+            rotationSlots = []
+            rotationError = "Could not load live rotation from API."
+        }
+    }
+
+    private func parseRotation(_ any: Any) -> [RotationSlot] {
+        let items: [Any]
+        if let arr = any as? [Any] {
+            items = arr
+        } else if let d = any as? [String: Any], let cur = d["current"] as? [Any] {
+            items = cur
+        } else if let d = any as? [String: Any], let arr = d["items"] as? [Any] {
+            items = arr
+        } else {
+            return []
+        }
+
+        return items.compactMap { item in
+            guard let rec = item as? [String: Any] else { return nil }
+            let ev = (rec["event"] as? [String: Any]) ?? rec
+            let mapName = (ev["map"] as? String) ?? (ev["mapName"] as? String) ?? "Unknown map"
+            let mode = (ev["mode"] as? String) ?? "Unknown mode"
+            let mapId: String?
+            if let id = ev["mapId"] {
+                mapId = String(describing: id)
+            } else {
+                mapId = nil
+            }
+            return RotationSlot(mapId: mapId, mapName: mapName, mode: mode)
+        }
+    }
+}
+
+private struct RotationSlot: Identifiable {
+    let id = UUID()
+    let mapId: String?
+    let mapName: String
+    let mode: String
 }
 
 private struct PressScaleButtonStyle: ButtonStyle {

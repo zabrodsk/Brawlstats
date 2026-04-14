@@ -1,0 +1,1 @@
+var r={},_=(u,d,i)=>(r.__chunk_6054=(l,n,t)=>{"use strict";t.d(n,{n:()=>a});var e=t(9985),o=t(9815);function a(s){if(s instanceof o.qh)return e.xk.json({error:s.message,code:s.code,reason:s.reason},{status:s.status});let c=s instanceof Error?s.message:"Unexpected error.";return e.xk.json({error:c,code:"internal"},{status:500})}},r);export{_ as __getNamedExports};

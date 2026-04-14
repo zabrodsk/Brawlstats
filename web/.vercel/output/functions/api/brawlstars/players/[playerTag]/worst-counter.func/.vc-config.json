@@ -1,0 +1,18 @@
+{
+  "runtime": "edge",
+  "name": "api/brawlstars/players/[playerTag]/worst-counter",
+  "deploymentTarget": "v8-worker",
+  "entrypoint": "index.js",
+  "assets": [],
+  "framework": {
+    "slug": "nextjs",
+    "version": "14.2.35"
+  },
+  "environment": {
+    "__NEXT_BUILD_ID": "C--5rhUo4DT2XeR2PqBnA",
+    "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "UIjECQJIHP9bgFuhaf3bYfD8VOEuVZYPh6vCioMC/HE=",
+    "__NEXT_PREVIEW_MODE_ID": "0f12d0fd1349a99d23fa4b75acfa0735",
+    "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "1ae862b780541bcd60709713ae2b9b96d13b73556204b9e9ed8e334756a041f8",
+    "__NEXT_PREVIEW_MODE_SIGNING_KEY": "43a24ff988fb273d07b14fdd578f43493db26e6e54e64a05d7ec4cc4b9fc90d4"
+  }
+}

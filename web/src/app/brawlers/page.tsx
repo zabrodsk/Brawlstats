@@ -80,7 +80,8 @@ export default function BrawlersPage() {
           : filtered.map((brawler) => (
               <div
                 key={brawler.id}
-                className="rounded-lg bg-[#161B22] border border-gray-800 p-3 flex flex-col items-center gap-1.5 hover:border-gray-600 transition-colors"
+                id={`brawler-${brawler.id}`}
+                className="rounded-lg bg-[#161B22] border border-gray-800 p-3 flex flex-col items-center gap-1.5 hover:border-gray-600 transition-colors scroll-mt-24"
               >
                 <div className="relative w-16 h-16">
                   <Image

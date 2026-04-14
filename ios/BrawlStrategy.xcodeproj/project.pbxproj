@@ -11,11 +11,15 @@
 		07829A3CF8E79BD68A58D930 /* TierList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8975CDAE0E3C295FE5DAC8C8 /* TierList.swift */; };
 		1AB76CE448BEA1EDF23993BD /* BrawlStatsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB34BA012754BBCE2608879 /* BrawlStatsApp.swift */; };
 		21504CE2A6653A1DE53438D9 /* MyStratsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0E9B44ED1D1B670E61E6F2 /* MyStratsView.swift */; };
+		24F7BFB72A67D80F38378C72 /* Info 2.plist in Resources */ = {isa = PBXBuildFile; fileRef = B9CC276252FDD29FB19B208F /* Info 2.plist */; };
 		2507B79F413124983691026B /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3380373CB24FD5F18A3E59 /* ImageCache.swift */; };
 		253FAE5A0BA94D317B400728 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84049CC852788160431F0A96 /* LaunchScreen.storyboard */; };
+		25C9877AF4F73AB622FB0761 /* Info 3.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C65062346AB045A163ADDAE /* Info 3.plist */; };
 		2A48B4A9E05CC294524F0603 /* StrategyCanvasMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA20467C45A471D6C57BBDF /* StrategyCanvasMetrics.swift */; };
 		3B07C324B88C58B5DB62EFA2 /* Strategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F4286D87396F29D5EB73A7 /* Strategy.swift */; };
+		40D70E3999F2F9A74F14B35A /* MyClubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D075BC8C67F17CDA73F5A193 /* MyClubView.swift */; };
 		414BD5E14551F531143E020E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F22EB902BD047415499B1B3 /* ContentView.swift */; };
+		45D4DEA6322D0B909DA363F2 /* BrawlStarsAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F35EFEBEB8CFBA59CEBF8B /* BrawlStarsAPIClient.swift */; };
 		5755F0364D5A244F2D57ED6D /* BrawlersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6D21A28C34C20580C1C3B5 /* BrawlersView.swift */; };
 		5A74A9A86B1052F9827D4145 /* MapsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3F7E80FAD4005DAC8C86D3 /* MapsView.swift */; };
 		5BBE3DF5E8DA170BDD70FF6C /* TierListsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7299A4AAB2786DED513057B1 /* TierListsView.swift */; };
@@ -30,10 +34,12 @@
 		D044835D6C44E4FA641DFFC1 /* BrawlifyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE23100069FE0DBFF7CED92 /* BrawlifyService.swift */; };
 		D4B308A43E52ECE2461420E0 /* GameMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54EF43FCC0C9FA5AFB9BF2F1 /* GameMap.swift */; };
 		E618EF05A7C194C76FA4AE7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2BB2DCA47270D8E68BB7768 /* Assets.xcassets */; };
+		FF23AF9143AE4C9B4CFAD7AA /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFC112672B13A41E608BE77 /* AccountView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		00B5A0A671AC65EA8FD80667 /* CachedAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedAsyncImage.swift; sourceTree = "<group>"; };
+		0C65062346AB045A163ADDAE /* Info 3.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Info 3.plist"; sourceTree = "<group>"; };
 		289E3E7C5B47761FB841B7D7 /* HomeHubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHubView.swift; sourceTree = "<group>"; };
 		2D33113228CE6DD18B38E0E2 /* StrategyCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategyCanvasView.swift; sourceTree = "<group>"; };
 		364A46FBFE13585304CC08AC /* BrawlStrategy.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = BrawlStrategy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,12 +52,16 @@
 		86574F6831901A109976D06E /* StrategyEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategyEditorView.swift; sourceTree = "<group>"; };
 		8975CDAE0E3C295FE5DAC8C8 /* TierList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierList.swift; sourceTree = "<group>"; };
 		90613A8A972F5D0F62D8B579 /* StrategyElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategyElement.swift; sourceTree = "<group>"; };
+		96F35EFEBEB8CFBA59CEBF8B /* BrawlStarsAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrawlStarsAPIClient.swift; sourceTree = "<group>"; };
 		9B420DAB373F10BA79F9D3B6 /* Brawler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brawler.swift; sourceTree = "<group>"; };
 		9E3F7E80FAD4005DAC8C86D3 /* MapsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsView.swift; sourceTree = "<group>"; };
 		A2F4286D87396F29D5EB73A7 /* Strategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strategy.swift; sourceTree = "<group>"; };
+		B9CC276252FDD29FB19B208F /* Info 2.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Info 2.plist"; sourceTree = "<group>"; };
 		CDB34BA012754BBCE2608879 /* BrawlStatsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrawlStatsApp.swift; sourceTree = "<group>"; };
 		CFA20467C45A471D6C57BBDF /* StrategyCanvasMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategyCanvasMetrics.swift; sourceTree = "<group>"; };
+		D075BC8C67F17CDA73F5A193 /* MyClubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyClubView.swift; sourceTree = "<group>"; };
 		DB6D21A28C34C20580C1C3B5 /* BrawlersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrawlersView.swift; sourceTree = "<group>"; };
+		DCFC112672B13A41E608BE77 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		DF0E9B44ED1D1B670E61E6F2 /* MyStratsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStratsView.swift; sourceTree = "<group>"; };
 		E2BB2DCA47270D8E68BB7768 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F26020E2B58F8BEAEBEE9851 /* CanvasToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasToolbar.swift; sourceTree = "<group>"; };
@@ -74,6 +84,8 @@
 				E2BB2DCA47270D8E68BB7768 /* Assets.xcassets */,
 				CDB34BA012754BBCE2608879 /* BrawlStatsApp.swift */,
 				7F22EB902BD047415499B1B3 /* ContentView.swift */,
+				B9CC276252FDD29FB19B208F /* Info 2.plist */,
+				0C65062346AB045A163ADDAE /* Info 3.plist */,
 				84049CC852788160431F0A96 /* LaunchScreen.storyboard */,
 				637AE6872FFC6BA5F14FD40E /* Canvas */,
 				05DB2072B71D18B53F9B8AF3 /* Components */,
@@ -88,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				FDE23100069FE0DBFF7CED92 /* BrawlifyService.swift */,
+				96F35EFEBEB8CFBA59CEBF8B /* BrawlStarsAPIClient.swift */,
 				5F3380373CB24FD5F18A3E59 /* ImageCache.swift */,
 			);
 			path = Services;
@@ -137,9 +150,11 @@
 		EEE6F1709404B4F6203E6502 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DCFC112672B13A41E608BE77 /* AccountView.swift */,
 				DB6D21A28C34C20580C1C3B5 /* BrawlersView.swift */,
 				289E3E7C5B47761FB841B7D7 /* HomeHubView.swift */,
 				9E3F7E80FAD4005DAC8C86D3 /* MapsView.swift */,
+				D075BC8C67F17CDA73F5A193 /* MyClubView.swift */,
 				DF0E9B44ED1D1B670E61E6F2 /* MyStratsView.swift */,
 				7299A4AAB2786DED513057B1 /* TierListsView.swift */,
 			);
@@ -201,6 +216,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E618EF05A7C194C76FA4AE7A /* Assets.xcassets in Resources */,
+				24F7BFB72A67D80F38378C72 /* Info 2.plist in Resources */,
+				25C9877AF4F73AB622FB0761 /* Info 3.plist in Resources */,
 				253FAE5A0BA94D317B400728 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -212,6 +229,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF23AF9143AE4C9B4CFAD7AA /* AccountView.swift in Sources */,
+				45D4DEA6322D0B909DA363F2 /* BrawlStarsAPIClient.swift in Sources */,
 				1AB76CE448BEA1EDF23993BD /* BrawlStatsApp.swift in Sources */,
 				A981AE19498A14F68666CAD3 /* Brawler.swift in Sources */,
 				8454FE5659DE00D79B28ED13 /* BrawlerPickerView.swift in Sources */,
@@ -225,6 +244,7 @@
 				7E2340F4F0ECD1057B41B9E3 /* HomeHubView.swift in Sources */,
 				2507B79F413124983691026B /* ImageCache.swift in Sources */,
 				5A74A9A86B1052F9827D4145 /* MapsView.swift in Sources */,
+				40D70E3999F2F9A74F14B35A /* MyClubView.swift in Sources */,
 				21504CE2A6653A1DE53438D9 /* MyStratsView.swift in Sources */,
 				3B07C324B88C58B5DB62EFA2 /* Strategy.swift in Sources */,
 				2A48B4A9E05CC294524F0603 /* StrategyCanvasMetrics.swift in Sources */,
